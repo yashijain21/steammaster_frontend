@@ -82,13 +82,16 @@ const Header = () => {
                 <div className="navbar-center hidden lg:flex">
                     <nav className="flex gap-7">{navLinks}</nav>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end gap-1">
                     <div className="flex gap-5 mr-6">
                         <button>
-                            <SlHandbag size={20} />
+                            <SlHandbag size={20} className="active:scale-95" />
                         </button>
                         <button>
-                            <IoIosSearch size={20} />
+                            <IoIosSearch
+                                size={20}
+                                className="active:scale-95"
+                            />
                         </button>
                     </div>
                     <button className="btn bg-transparent border border-[#FF3811] text-[#FF3811] hover:bg-[#FF3811] hover:text-white transition-all px-5">
@@ -121,7 +124,7 @@ const Header = () => {
                         {isMobileMenuOpen && (
                             <nav
                                 tabIndex={0}
-                                className="flex flex-col absolute right-0 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                                className="flex flex-col absolute right-0 mt-3 z-[1] p-4 gap-2 shadow bg-base-100 rounded-box w-52"
                             >
                                 {navLinks}
                             </nav>
