@@ -60,11 +60,6 @@ const Header = () => {
             />
             <SingleNav
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                pageTitle="Blog"
-                path="/blog"
-            />
-            <SingleNav
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
                 pageTitle="Contact"
                 path="/contact"
             />
@@ -75,7 +70,7 @@ const Header = () => {
         <div className="container mx-auto px-3 md:px-6 py-2">
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
-                    <Link>
+                    <Link to="/">
                         <img className="w-24" src="/logo.svg" alt="logo" />
                     </Link>
                 </div>
@@ -83,15 +78,12 @@ const Header = () => {
                     <nav className="flex gap-7">{navLinks}</nav>
                 </div>
                 <div className="navbar-end gap-1">
-                    <div className="flex gap-5 mr-6">
-                        <button>
-                            <SlHandbag size={20} className="active:scale-95" />
+                    <div className="mr-4">
+                        <button className="btn btn-ghost btn-circle">
+                            <SlHandbag size={20} />
                         </button>
-                        <button>
-                            <IoIosSearch
-                                size={20}
-                                className="active:scale-95"
-                            />
+                        <button className="btn btn-ghost btn-circle">
+                            <IoIosSearch size={20} />
                         </button>
                     </div>
                     <button className="btn bg-transparent border border-[#FF3811] text-[#FF3811] hover:bg-[#FF3811] hover:text-white transition-all px-5">
