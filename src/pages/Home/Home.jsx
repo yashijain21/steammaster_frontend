@@ -1,7 +1,9 @@
+import Slider from "./Slider";
+
 const Home = () => {
     return (
-        <div>
-            <h2>This is home page</h2>
+        <div className="container mx-auto px-3 md:px-6">
+            <Slider />
         </div>
     );
 };

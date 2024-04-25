@@ -3,6 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tw-elements/js/**/*.js"
   ],
   theme: {
     extend: {
@@ -11,6 +12,7 @@ export default {
         'inter': ['Inter', 'sans-serif'],
       },
       colors: {
+        "primary": "#FF3811",
         'dark6': '#E8E8E8'
       },
     },

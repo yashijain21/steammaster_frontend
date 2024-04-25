@@ -9,7 +9,7 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
         <NavLink
             className={({ isActive }) =>
                 isActive
-                    ? "font-medium lg:font-semibold text-lg text-[#FF3811] dark:text-[#FF3811]"
+                    ? "font-medium lg:font-semibold text-lg text-primary dark:text-primary"
                     : "font-medium lg:font-semibold text-lg text-[#444444] dark:text-gray-200"
             }
             to={path}
@@ -86,7 +86,7 @@ const Header = () => {
                             <IoIosSearch size={20} />
                         </button>
                     </div>
-                    <button className="btn bg-transparent border border-[#FF3811] text-[#FF3811] hover:bg-[#FF3811] hover:text-white transition-all px-5">
+                    <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all px-5">
                         Appointment
                     </button>
                     <div className="dropdown" ref={dropdownRef}>
