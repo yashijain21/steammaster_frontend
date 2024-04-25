@@ -71,14 +71,18 @@ const Header = () => {
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     <Link to="/">
-                        <img className="w-24" src="/logo.svg" alt="logo" />
+                        <img
+                            className="w-20 sm:w-24"
+                            src="/logo.svg"
+                            alt="logo"
+                        />
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <nav className="flex gap-7">{navLinks}</nav>
                 </div>
                 <div className="navbar-end gap-1">
-                    <div className="mr-4">
+                    <div className="hidden sm:flex mr-4">
                         <button className="btn btn-ghost btn-circle">
                             <SlHandbag size={20} />
                         </button>
@@ -86,7 +90,7 @@ const Header = () => {
                             <IoIosSearch size={20} />
                         </button>
                     </div>
-                    <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all px-5">
+                    <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5">
                         Appointment
                     </button>
                     <div className="dropdown" ref={dropdownRef}>

@@ -25,23 +25,23 @@ function Slider() {
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <div
-                        className="hero min-h-[75vh]"
+                        className="hero min-h-[400px] md:min-h-[600px]"
                         style={{
                             backgroundImage: "url(/images/banner/5.jpg)",
                         }}
                     >
                         <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
-                        <div className="text-white w-full pl-20">
+                        <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
-                                <h1 className="mb-5 text-6xl font-bold">
+                                <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
                                     Affordable Price For Car Servicing
                                 </h1>
-                                <p className="mb-5 text-lg">
+                                <p className="mb-5 md:text-lg">
                                     There are many variations of passages of
                                     available, but the majority have suffered
                                     alteration in some form
                                 </p>
-                                <div className="space-x-2">
+                                <div className="flex gap-2">
                                     <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
                                         Discover More
                                     </button>
@@ -60,23 +60,23 @@ function Slider() {
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <div
-                        className="hero min-h-[75vh]"
+                        className="hero min-h-[400px] md:min-h-[600px]"
                         style={{
                             backgroundImage: "url(/images/banner/1.jpg)",
                         }}
                     >
                         <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
-                        <div className="text-white w-full pl-20">
+                        <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
-                                <h1 className="mb-5 text-6xl font-bold">
+                                <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
                                     Quality Repairs for Your Vehicle
                                 </h1>
-                                <p className="mb-5 text-lg">
+                                <p className="mb-5 md:text-lg">
                                     Our expert technicians provide top-notch
                                     repairs to ensure your vehicle performs at
                                     its best.
                                 </p>
-                                <div className="space-x-2">
+                                <div className="flex gap-2">
                                     <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
                                         Discover More
                                     </button>
@@ -95,23 +95,23 @@ function Slider() {
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <div
-                        className="hero min-h-[75vh]"
+                        className="hero min-h-[400px] md:min-h-[600px]"
                         style={{
                             backgroundImage: "url(/images/banner/2.jpg)",
                         }}
                     >
                         <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
-                        <div className="text-white w-full pl-20">
+                        <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
-                                <h1 className="mb-5 text-6xl font-bold">
+                                <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
                                     Experience Unmatched Performance
                                 </h1>
-                                <p className="mb-5 text-lg">
+                                <p className="mb-5 md:text-lg">
                                     Discover the thrill of driving with our
                                     high-performance upgrades and tuning
                                     services.
                                 </p>
-                                <div className="space-x-2">
+                                <div className="flex gap-2">
                                     <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
                                         Discover More
                                     </button>
@@ -130,23 +130,23 @@ function Slider() {
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <div
-                        className="hero min-h-[75vh]"
+                        className="hero min-h-[400px] md:min-h-[600px]"
                         style={{
                             backgroundImage: "url(/images/banner/3.jpg)",
                         }}
                     >
                         <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
-                        <div className="text-white w-full pl-20">
+                        <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
-                                <h1 className="mb-5 text-6xl font-bold">
+                                <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
                                     Reliable Maintenance Services
                                 </h1>
-                                <p className="mb-5 text-lg">
+                                <p className="mb-5 md:text-lg">
                                     Keep your car running smoothly with our
                                     comprehensive maintenance plans tailored to
                                     your needs.
                                 </p>
-                                <div className="space-x-2">
+                                <div className="flex gap-2">
                                     <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
                                         Discover More
                                     </button>
@@ -165,23 +165,23 @@ function Slider() {
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <div
-                        className="hero min-h-[75vh]"
+                        className="hero min-h-[400px] md:min-h-[600px]"
                         style={{
                             backgroundImage: "url(/images/banner/4.jpg)",
                         }}
                     >
                         <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
-                        <div className="text-white w-full pl-20">
-                            <div className="max-w-lg">
-                                <h1 className="mb-5 text-6xl font-bold">
+                        <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
+                            <div className="max-w-lg 2xl:max-w-2xl">
+                                <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
                                     Expert Detailing for Your Car
                                 </h1>
-                                <p className="mb-5 text-lg">
+                                <p className="mb-5 md:text-lg">
                                     Restore your car&apos;s shine and protect
                                     its finish with our professional detailing
                                     services.
                                 </p>
-                                <div className="space-x-2">
+                                <div className="flex gap-2">
                                     <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
                                         Discover More
                                     </button>
@@ -200,23 +200,23 @@ function Slider() {
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     <div
-                        className="hero min-h-[75vh]"
+                        className="hero min-h-[400px] md:min-h-[600px]"
                         style={{
                             backgroundImage: "url(/images/banner/6.jpg)",
                         }}
                     >
                         <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
-                        <div className="text-white w-full pl-20">
+                        <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
-                                <h1 className="mb-5 text-6xl font-bold">
+                                <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
                                     Upgrade Your Ride Today
                                 </h1>
-                                <p className="mb-5 text-lg">
+                                <p className="mb-5 md:text-lg">
                                     Explore our wide range of upgrade options
                                     and take your driving experience to the next
                                     level.
                                 </p>
-                                <div className="space-x-2">
+                                <div className="flex gap-2">
                                     <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
                                         Discover More
                                     </button>
@@ -232,7 +232,7 @@ function Slider() {
 
             {/* Carousel controls - prev item */}
             <button
-                className="absolute right-32 bottom-8 flex items-center justify-center bg-[#ffffff3d] hover:bg-primary transition-all h-20 w-20 rounded-full text-white hover:text-white z-20"
+                className="absolute right-20 md:right-32 bottom-4 md:bottom-8 flex items-center justify-center bg-[#ffffff3d] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full text-white hover:text-white z-20"
                 type="button"
                 data-twe-target="#homePageSlider"
                 data-twe-slide="prev"
@@ -242,7 +242,7 @@ function Slider() {
 
             {/* Carousel controls - next item */}
             <button
-                className="absolute right-8 bottom-8 flex items-center justify-center bg-[#ffffff3d] hover:bg-primary transition-all h-20 w-20 rounded-full text-white hover:text-white z-20"
+                className="absolute right-4 md:right-8 bottom-4 md:bottom-8 flex items-center justify-center bg-[#ffffff3d] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full text-white hover:text-white z-20"
                 type="button"
                 data-twe-target="#homePageSlider"
                 data-twe-slide="next"

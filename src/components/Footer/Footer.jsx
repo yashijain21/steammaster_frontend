@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <footer className="bg-[#151515]">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 text-center lg:text-left text-dark6 container mx-auto px-3 md:px-6 py-20">
-                <aside className="space-y-3">
+            <div className="grid grid-cols-1 lg:grid-cols-4 lg:gap-4 text-center lg:text-left text-dark6 container mx-auto px-3 md:px-6 py-20">
+                <aside className="space-y-3 mb-6 lg:mb-0">
                     <div>
                         <Link to="/">
                             <img
