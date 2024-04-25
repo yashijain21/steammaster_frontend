@@ -30,7 +30,7 @@ function Slider() {
                             backgroundImage: "url(/images/banner/5.jpg)",
                         }}
                     >
-                        <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-[#151515] to-transparent"></div>
                         <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
                                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
@@ -65,7 +65,7 @@ function Slider() {
                             backgroundImage: "url(/images/banner/1.jpg)",
                         }}
                     >
-                        <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-[#151515] to-transparent"></div>
                         <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
                                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
@@ -100,7 +100,7 @@ function Slider() {
                             backgroundImage: "url(/images/banner/2.jpg)",
                         }}
                     >
-                        <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-[#151515] to-transparent"></div>
                         <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
                                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
@@ -135,7 +135,7 @@ function Slider() {
                             backgroundImage: "url(/images/banner/3.jpg)",
                         }}
                     >
-                        <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-[#151515] to-transparent"></div>
                         <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
                                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
@@ -170,7 +170,7 @@ function Slider() {
                             backgroundImage: "url(/images/banner/4.jpg)",
                         }}
                     >
-                        <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-[#151515] to-transparent"></div>
                         <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg 2xl:max-w-2xl">
                                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
@@ -205,7 +205,7 @@ function Slider() {
                             backgroundImage: "url(/images/banner/6.jpg)",
                         }}
                     >
-                        <div className="hero-overlay bg-opacity-60 bg-gradient-to-r from-[#00000088] to-transparent"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-[#151515] to-transparent"></div>
                         <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                             <div className="max-w-lg">
                                 <h1 className="mb-5 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold">
