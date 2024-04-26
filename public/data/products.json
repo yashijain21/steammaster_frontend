@@ -1,0 +1,44 @@
+[
+    {
+        "_id": "1",
+        "name": "Car Air Filter",
+        "image": "https://trickbd.com/wp-content/uploads/2024/04/26/1.png",
+        "rating": 4.5,
+        "price": "20.99"
+    },
+    {
+        "_id": "2",
+        "name": "Cools Led Light",
+        "image": "https://trickbd.com/wp-content/uploads/2024/04/26/2.png",
+        "rating": 4.8,
+        "price": "15.49"
+    },
+    {
+        "_id": "3",
+        "name": "Performance Brake Pads",
+        "image": "https://trickbd.com/wp-content/uploads/2024/04/26/3.png",
+        "rating": 4.7,
+        "price": "49.99"
+    },
+    {
+        "_id": "4",
+        "name": "Premium Car Wax",
+        "image": "https://trickbd.com/wp-content/uploads/2024/04/26/4.png",
+        "rating": 4.6,
+        "price": "29.99"
+    },
+    {
+        "_id": "5",
+        "name": "High-Performance Tires",
+        "image": "https://trickbd.com/wp-content/uploads/2024/04/26/5.png",
+        "rating": 4.9,
+        "price": "149.99"
+    },
+    {
+        "_id": "6",
+        "name": "Bluetooth Car Stereo",
+        "image": "https://trickbd.com/wp-content/uploads/2024/04/26/6.png",
+        "rating": 4.8,
+        "price": "89.99"
+    }
+]
