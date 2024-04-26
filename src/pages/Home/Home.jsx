@@ -1,4 +1,5 @@
 import About from "./About";
+import CallToAction from "./CallToAction";
 import ServicesSection from "./ServicesSection/ServicesSection";
 import Slider from "./Slider";
 
@@ -8,6 +9,7 @@ const Home = () => {
             <Slider />
             <About />
             <ServicesSection />
+            <CallToAction />
         </div>
     );
 };
