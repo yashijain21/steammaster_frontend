@@ -1,6 +1,6 @@
 const About = () => {
     return (
-        <div className="py-20">
+        <div className="py-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="flex items-center">
                     <div className="relative pb-20 sm:h-[430px] md:h-[500px] lg:h-[330px] xl:h-[420px] 2xl:h-[500px]">
@@ -30,7 +30,7 @@ const About = () => {
                         injected humour, or randomised words which don&apos;t
                         look even slightly believable.
                     </p>
-                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-primary hover:text-primary">
                         Get More Info
                     </button>
                 </div>

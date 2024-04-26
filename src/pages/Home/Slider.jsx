@@ -11,7 +11,7 @@ function Slider() {
     return (
         <div
             id="homePageSlider"
-            className="relative my-6 rounded-2xl overflow-hidden"
+            className="relative mt-6 mb-10 rounded-2xl overflow-hidden"
             data-twe-carousel-init
             data-twe-ride="carousel"
         >
