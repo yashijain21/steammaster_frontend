@@ -14,7 +14,7 @@ const Features = () => {
                 title="Why Choose Us"
                 description="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "
             />
-            <div className="grid grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                 {features?.map((feature) => (
                     <div
                         key={feature._id}

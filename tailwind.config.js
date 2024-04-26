@@ -14,7 +14,8 @@ export default {
       colors: {
         "primary": "#FF3811",
         'dark6': '#E8E8E8',
-        'dark2': '#444444'
+        'dark2': '#444444',
+        'dark3': '#737373'
       },
     },
   },

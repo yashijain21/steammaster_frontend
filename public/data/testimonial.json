@@ -1,0 +1,16 @@
+[
+    {
+        "_id": "1",
+        "name": "John Doe",
+        "image": "https://randomuser.me/api/portraits/men/19.jpg",
+        "designation": "Car Enthusiast",
+        "description": "I've been a car enthusiast for years, and I must say, this website has everything a car lover needs. From the latest parts to expert advice, it's my go-to place for all things automotive."
+    },
+    {
+        "_id": "2",
+        "name": "Jane Smith",
+        "image": "https://randomuser.me/api/portraits/men/62.jpg",
+        "designation": "Happy Customer",
+        "description": "I recently purchased some car parts from this website, and I couldn't be happier with the quality and service. The parts arrived quickly, and they were exactly what I needed. Highly recommended!"
+    }
+]

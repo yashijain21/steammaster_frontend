@@ -4,6 +4,7 @@ import CallToAction from "./CallToAction";
 import Features from "./Features";
 import ServicesSection from "./ServicesSection/ServicesSection";
 import Slider from "./Slider";
+import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <CallToAction />
             <AllProducts />
             <Features />
+            <Testimonials />
         </div>
     );
 };
