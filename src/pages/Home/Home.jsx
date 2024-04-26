@@ -1,6 +1,7 @@
 import About from "./About";
 import AllProducts from "./AllProducts/AllProducts";
 import CallToAction from "./CallToAction";
+import Features from "./Features";
 import ServicesSection from "./ServicesSection/ServicesSection";
 import Slider from "./Slider";
 
@@ -12,6 +13,7 @@ const Home = () => {
             <ServicesSection />
             <CallToAction />
             <AllProducts />
+            <Features />
         </div>
     );
 };
