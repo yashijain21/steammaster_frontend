@@ -1,9 +1,99 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import LoginWith from "./LoginWith";
+import { IoEye, IoEyeOff } from "react-icons/io5";
+import { useContext, useEffect, useRef, useState } from "react";
+import formatFirebaseError from "../../utils/formatFirebaseError";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Bounce, toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const emailRef = useRef();
+
+    const { signInWithPassword, firebaseError, passwordReset } =
+        useContext(AuthContext);
+    const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
+    useEffect(() => {
+        if (firebaseError) {
+            setError(formatFirebaseError(firebaseError));
+        }
+    }, [firebaseError]);
+
     const handleLogin = (e) => {
         e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const email = form.get("email");
+        const password = form.get("password");
+
+        if (email === "") {
+            setError("Please fill in the email address");
+            return;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            setError("Invalid email");
+            return;
+        } else if (password === "") {
+            setError("Please fill in the password");
+            return;
+        }
+        setError("");
+        signInWithPassword(email, password)
+            .then((result) => {
+                console.log(result.user);
+                if (!result.user.emailVerified) {
+                    setError("Please verify your email");
+                } else {
+                    location.state ? navigate(location.state) : navigate("/");
+
+                    toast.success("Login Successful", {
+                        position: "top-right",
+                        autoClose: 500,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
+                    });
+                }
+            })
+            .catch((err) => {
+                setError(formatFirebaseError(err));
+            });
     };
+
+    const handleForgotPass = () => {
+        const email = emailRef.current.value;
+        console.log(email);
+        if (email === "") {
+            setError("Please fill in the email address");
+            return;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            setError("Please enter a valid email address");
+            return;
+        }
+        setError("");
+        passwordReset(email)
+            .then(() => {
+                Swal.fire({
+                    title: "Please check your email",
+                    text: `Please check your ${email} for a link to reset your password.`,
+                    imageUrl: "/images/email/mail.png",
+                    imageWidth: 128,
+                    imageHeight: 128,
+                    imageAlt: "Email",
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(formatFirebaseError(err));
+            });
+    };
+
     return (
         <div className="container mx-auto px-3 md:px-6 py-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="flex items-center">
@@ -31,9 +121,10 @@ const Login = () => {
                             name="email"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-grasm:y-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500 py-3 sm:py-4 px-5"
                             placeholder="Your email"
+                            ref={emailRef}
                         />
                     </div>
-                    <div className="mb-5">
+                    <div className="mb-5 relative">
                         <label
                             htmlFor="password"
                             className="block mb-2 text-lg font-semibold text-gray-900 dark:text-white"
@@ -41,12 +132,30 @@ const Login = () => {
                             Password
                         </label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             name="password"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-grasm:y-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500 py-3 sm:py-4 px-5"
                             placeholder="Your password"
                         />
+                        <span
+                            className="cursor-pointer absolute right-4 bottom-11 sm:bottom-12"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? (
+                                <IoEyeOff className="w-5 h-5" />
+                            ) : (
+                                <IoEye className="w-5 h-5" />
+                            )}
+                        </span>
+                        <label className="label">
+                            <span
+                                onClick={handleForgotPass}
+                                className="label-text-alt link link-hover cursor-pointer"
+                            >
+                                Forgot password?
+                            </span>
+                        </label>
                     </div>
 
                     <button
@@ -56,32 +165,11 @@ const Login = () => {
                         Sign In
                     </button>
                 </form>
+                {error && <p className="text-red-600 pt-2">{error}</p>}
                 <p className="text-center text-dark2 font-medium">
                     Or Sign In with
                 </p>
-                <div className="flex gap-2 justify-center">
-                    <button className="bg-[#F5F5F8] w-12 h-12 sm:w-14 sm:h-14 flex justify-center items-center rounded-full hover:bg-[#e8e8ec]">
-                        <img
-                            src="/icons/login/facebook.svg"
-                            alt="facebook"
-                            className="w-6 h-6 sm:w-7 sm:h-7"
-                        />
-                    </button>
-                    <button className="bg-[#F5F5F8] w-12 h-12 sm:w-14 sm:h-14 flex justify-center items-center rounded-full hover:bg-[#e8e8ec]">
-                        <img
-                            src="/icons/login/linkedin.svg"
-                            alt="linkedin"
-                            className="w-6 h-6 sm:w-7 sm:h-7"
-                        />
-                    </button>
-                    <button className="bg-[#F5F5F8] w-12 h-12 sm:w-14 sm:h-14 flex justify-center items-center rounded-full hover:bg-[#e8e8ec]">
-                        <img
-                            src="/icons/login/google.svg"
-                            alt="google"
-                            className="w-6 h-6 sm:w-7 sm:h-7"
-                        />
-                    </button>
-                </div>
+                <LoginWith location={location} />
                 <p className="text-center text-[#737373]">
                     Don&apos;t have an account?{" "}
                     <Link to="/register" className="text-primary font-semibold">
