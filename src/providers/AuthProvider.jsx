@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
     GoogleAuthProvider,
     TwitterAuthProvider,
-    FacebookAuthProvider,
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     sendEmailVerification,
@@ -12,6 +11,7 @@ import {
     signInWithPopup,
     signOut,
     updateProfile,
+    GithubAuthProvider,
 } from "firebase/auth";
 import Swal from "sweetalert2";
 import auth from "../firebase/firebase.config";
@@ -20,7 +20,7 @@ export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -37,9 +37,9 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, twitterProvider);
     };
 
-    const facebookLogin = () => {
+    const githubLogin = () => {
         setLoading(true);
-        return signInWithPopup(auth, facebookProvider);
+        return signInWithPopup(auth, githubProvider);
     };
 
     const createUser = (email, password) => {
@@ -116,7 +116,7 @@ const AuthProvider = ({ children }) => {
         loading,
         googleLogin,
         twitterLogin,
-        facebookLogin,
+        githubLogin,
         createUser,
         signInWithPassword,
         updateInfo,

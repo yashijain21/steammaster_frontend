@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginWith = ({ location }) => {
     const navigate = useNavigate();
-    const { googleLogin, twitterLogin, facebookLogin } =
-        useContext(AuthContext);
+    const { googleLogin, twitterLogin, githubLogin } = useContext(AuthContext);
 
     const successTost = (result) => {
         console.log(result.user);
@@ -63,8 +62,8 @@ const LoginWith = ({ location }) => {
             });
     };
 
-    const handleFacebook = () => {
-        facebookLogin()
+    const handleGithub = () => {
+        githubLogin()
             .then((result) => {
                 successTost(result);
             })
@@ -76,15 +75,16 @@ const LoginWith = ({ location }) => {
     return (
         <div className="flex gap-2 justify-center">
             <button
-                onClick={handleFacebook}
+                onClick={handleGoogle}
                 className="bg-[#F5F5F8] w-12 h-12 sm:w-14 sm:h-14 flex justify-center items-center rounded-full hover:bg-[#e8e8ec]"
             >
                 <img
-                    src="/icons/login/facebook.svg"
-                    alt="facebook"
+                    src="/icons/login/google.svg"
+                    alt="google"
                     className="w-6 h-6 sm:w-7 sm:h-7"
                 />
             </button>
+
             <button
                 onClick={handleTwitter}
                 className="bg-[#F5F5F8] w-12 h-12 sm:w-14 sm:h-14 flex justify-center items-center rounded-full hover:bg-[#e8e8ec]"
@@ -96,12 +96,12 @@ const LoginWith = ({ location }) => {
                 />
             </button>
             <button
-                onClick={handleGoogle}
+                onClick={handleGithub}
                 className="bg-[#F5F5F8] w-12 h-12 sm:w-14 sm:h-14 flex justify-center items-center rounded-full hover:bg-[#e8e8ec]"
             >
                 <img
-                    src="/icons/login/google.svg"
-                    alt="google"
+                    src="/icons/login/github.svg"
+                    alt="github"
                     className="w-6 h-6 sm:w-7 sm:h-7"
                 />
             </button>
