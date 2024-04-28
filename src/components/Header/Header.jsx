@@ -3,6 +3,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { SlHandbag } from "react-icons/sl";
 import { AuthContext } from "../../providers/AuthProvider";
+import userDefaultPicture from "/images/login/user.png";
+import { Link as ScrollLink } from "react-scroll";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -17,6 +19,23 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
         >
             {pageTitle}
         </NavLink>
+    );
+};
+
+const SingleScroll = ({ scrollTitle, id, setIsMobileMenuOpen }) => {
+    return (
+        <ScrollLink
+            className="font-medium lg:font-semibold text-lg text-[#444444] dark:text-gray-200 cursor-pointer"
+            to={id}
+            activeClass="active"
+            spy={true}
+            smooth={true}
+            offset={15}
+            duration={500}
+            onClick={() => setIsMobileMenuOpen(false)}
+        >
+            {scrollTitle}
+        </ScrollLink>
     );
 };
 
@@ -49,20 +68,25 @@ const Header = () => {
                 pageTitle="Home"
                 path="/"
             />
-            <SingleNav
+            <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                pageTitle="About"
-                path="/about"
+                scrollTitle="Services"
+                id="services"
             />
-            <SingleNav
+            <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                pageTitle="Services"
-                path="/services"
+                scrollTitle="Products"
+                id="products"
             />
-            <SingleNav
+            <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                pageTitle="Contact"
-                path="/contact"
+                scrollTitle="About"
+                id="about"
+            />
+            <SingleScroll
+                setIsMobileMenuOpen={setIsMobileMenuOpen}
+                scrollTitle="Contact"
+                id="contact"
             />
         </>
     );
@@ -90,11 +114,30 @@ const Header = () => {
                 <div className="navbar-center hidden lg:flex">
                     <nav className="flex gap-7">{navLinks}</nav>
                 </div>
-                <div className="navbar-end gap-1">
-                    <div className="hidden sm:flex mr-4">
-                        <button className="btn btn-ghost btn-circle">
-                            <SlHandbag size={20} />
-                        </button>
+                <div className="navbar-end">
+                    <div className="flex gap-1 mr-4">
+                        <div className="hidden sm:flex">
+                            <button className="btn btn-ghost btn-circle">
+                                <SlHandbag size={20} />
+                            </button>
+                        </div>
+                        <div
+                            role="button"
+                            className="btn btn-ghost btn-circle avatar"
+                        >
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="User Image"
+                                    src={
+                                        user
+                                            ? user.photoURL
+                                                ? user.photoURL
+                                                : userDefaultPicture
+                                            : userDefaultPicture
+                                    }
+                                />
+                            </div>
+                        </div>
                     </div>
                     {user ? (
                         <button
@@ -154,6 +197,12 @@ const Header = () => {
 SingleNav.propTypes = {
     pageTitle: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
+    setIsMobileMenuOpen: PropTypes.func.isRequired,
+};
+
+SingleScroll.propTypes = {
+    scrollTitle: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     setIsMobileMenuOpen: PropTypes.func.isRequired,
 };
 

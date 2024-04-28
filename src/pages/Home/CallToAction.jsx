@@ -1,6 +1,9 @@
 const CallToAction = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-5 px-6 md:px-10 lg:px-16 py-12 md:p-14 lg:py-16 xl:py-24 my-10 bg-[#151515] text-white rounded-xl">
+        <div
+            className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-5 px-6 md:px-10 lg:px-16 py-12 md:p-14 lg:py-16 xl:py-24 my-10 bg-[#151515] text-white rounded-xl"
+            id="contact"
+        >
             <div className="flex items-center justify-center md:justify-start gap-4">
                 <div>
                     <img src="/icons/cta/calender.svg" alt="" />

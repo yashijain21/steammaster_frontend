@@ -7,11 +7,13 @@ const AllProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("/data/products.json").then((res) => setProducts(res.data));
+        axios
+            .get("http://localhost:5000/products")
+            .then((res) => setProducts(res.data));
     }, []);
 
     return (
-        <div className="py-10 space-y-10">
+        <div className="py-10 space-y-10" id="products">
             <SectionTitle
                 section="Popular Products"
                 title="Browse Our Products"

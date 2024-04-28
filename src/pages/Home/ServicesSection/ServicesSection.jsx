@@ -13,7 +13,7 @@ const ServicesSection = () => {
     }, []);
 
     return (
-        <div className="py-10 space-y-10">
+        <div className="py-10 space-y-10" id="services">
             <SectionTitle
                 section="Service"
                 title="Our Service Area"

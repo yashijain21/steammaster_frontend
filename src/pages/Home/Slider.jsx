@@ -42,10 +42,10 @@ function Slider() {
                                     alteration in some form
                                 </p>
                                 <div className="flex gap-2">
-                                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                                    <button className="btn bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]">
                                         Discover More
                                     </button>
-                                    <button className="btn bg-transparent border-white text-white hover:bg-primary hover:text-white hover:border-primary">
+                                    <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d]">
                                         Latest Project
                                     </button>
                                 </div>
@@ -77,10 +77,10 @@ function Slider() {
                                     its best.
                                 </p>
                                 <div className="flex gap-2">
-                                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                                    <button className="btn bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]">
                                         Discover More
                                     </button>
-                                    <button className="btn bg-transparent border-white text-white hover:bg-primary hover:text-white hover:border-primary">
+                                    <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d]">
                                         Latest Project
                                     </button>
                                 </div>
@@ -112,10 +112,10 @@ function Slider() {
                                     services.
                                 </p>
                                 <div className="flex gap-2">
-                                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                                    <button className="btn bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]">
                                         Discover More
                                     </button>
-                                    <button className="btn bg-transparent border-white text-white hover:bg-primary hover:text-white hover:border-primary">
+                                    <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d]">
                                         Latest Project
                                     </button>
                                 </div>
@@ -147,10 +147,10 @@ function Slider() {
                                     your needs.
                                 </p>
                                 <div className="flex gap-2">
-                                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                                    <button className="btn bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]">
                                         Discover More
                                     </button>
-                                    <button className="btn bg-transparent border-white text-white hover:bg-primary hover:text-white hover:border-primary">
+                                    <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d]">
                                         Latest Project
                                     </button>
                                 </div>
@@ -182,10 +182,10 @@ function Slider() {
                                     services.
                                 </p>
                                 <div className="flex gap-2">
-                                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                                    <button className="btn bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]">
                                         Discover More
                                     </button>
-                                    <button className="btn bg-transparent border-white text-white hover:bg-primary hover:text-white hover:border-primary">
+                                    <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d]">
                                         Latest Project
                                     </button>
                                 </div>
@@ -217,10 +217,10 @@ function Slider() {
                                     level.
                                 </p>
                                 <div className="flex gap-2">
-                                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-white hover:text-white">
+                                    <button className="btn bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]">
                                         Discover More
                                     </button>
-                                    <button className="btn bg-transparent border-white text-white hover:bg-primary hover:text-white hover:border-primary">
+                                    <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d]">
                                         Latest Project
                                     </button>
                                 </div>

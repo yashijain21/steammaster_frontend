@@ -1,5 +1,6 @@
 import { FaGoogle, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 const Footer = () => {
     return (
@@ -49,18 +50,24 @@ const Footer = () => {
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-3 ">
                     <nav className="flex flex-col gap-2 lg:ml-12">
                         <h6 className="font-semibold text-xl text-white mb-1">
-                            About
+                            Pages
                         </h6>
                         <Link to="/">Home</Link>
-                        <Link>Service</Link>
-                        <Link>Contact</Link>
+                        <ScrollLink className="cursor-pointer" to="services">
+                            Service
+                        </ScrollLink>
+                        <ScrollLink className="cursor-pointer" to="contact">
+                            Contact
+                        </ScrollLink>
                     </nav>
                     <nav className="flex flex-col gap-2">
                         <h6 className="font-semibold text-xl text-white mb-1">
                             Company
                         </h6>
                         <Link>Why Car Doctor</Link>
-                        <Link to="/about">About</Link>
+                        <ScrollLink className="cursor-pointer" to="about">
+                            About
+                        </ScrollLink>
                     </nav>
                     <nav className="flex flex-col gap-2">
                         <h6 className="font-semibold text-xl text-white mb-1">

@@ -1,6 +1,6 @@
 const About = () => {
     return (
-        <div className="py-10">
+        <div className="py-10" id="about">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="flex items-center">
                     <div className="relative pb-20 sm:h-[430px] md:h-[500px] lg:h-[330px] xl:h-[420px] 2xl:h-[500px]">

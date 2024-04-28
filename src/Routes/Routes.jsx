@@ -5,6 +5,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import CheckOut from "../pages/Home/CheckOut/CheckOut";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -31,13 +32,23 @@ const router = createBrowserRouter([
             },
             {
                 path: "/service/:id/checkout",
-                element: <CheckOut />,
+                element: (
+                    <PrivetRoute>
+                        <CheckOut />
+                    </PrivetRoute>
+                ),
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/services/min/${params.id}`),
             },
             {
                 path: "/product/:id/checkout",
-                element: <CheckOut />,
+                element: (
+                    <PrivetRoute>
+                        <CheckOut />
+                    </PrivetRoute>
+                ),
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/products/${params.id}`),
             },
         ],
     },
