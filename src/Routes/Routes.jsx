@@ -3,6 +3,8 @@ import Home from "../pages/Home/Home";
 import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
+import CheckOut from "../pages/Home/CheckOut/CheckOut";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,22 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/service/:id",
+                element: <ServiceDetails />,
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/services/${params.id}`),
+            },
+            {
+                path: "/service/:id/checkout",
+                element: <CheckOut />,
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/services/min/${params.id}`),
+            },
+            {
+                path: "/product/:id/checkout",
+                element: <CheckOut />,
             },
         ],
     },

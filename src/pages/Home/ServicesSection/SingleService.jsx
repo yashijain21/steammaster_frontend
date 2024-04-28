@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 const SingleService = ({ service }) => {
     return (
-        <Link className="p-6 border border-gray-300 rounded-lg space-y-3">
+        <Link
+            to={`/service/${service._id}`}
+            className="p-6 border border-gray-300 rounded-lg space-y-3"
+        >
             <div>
                 <img
                     src={service.img}

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { SlHandbag } from "react-icons/sl";
-import { IoIosSearch } from "react-icons/io";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -23,6 +23,7 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef();
+    const { user, logOut } = useContext(AuthContext);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -66,6 +67,14 @@ const Header = () => {
         </>
     );
 
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                console.log("SignOut successful");
+            })
+            .catch((err) => console.error(err));
+    };
+
     return (
         <div className="container mx-auto px-3 md:px-6 py-2">
             <div className="navbar bg-base-100">
@@ -86,13 +95,23 @@ const Header = () => {
                         <button className="btn btn-ghost btn-circle">
                             <SlHandbag size={20} />
                         </button>
-                        <button className="btn btn-ghost btn-circle">
-                            <IoIosSearch size={20} />
-                        </button>
                     </div>
-                    <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5">
-                        Appointment
-                    </button>
+                    {user ? (
+                        <button
+                            onClick={handleLogOut}
+                            className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5"
+                        >
+                            Logout
+                        </button>
+                    ) : (
+                        <Link
+                            to="/login"
+                            className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5"
+                        >
+                            Login
+                        </Link>
+                    )}
+
                     <div className="dropdown" ref={dropdownRef}>
                         <div
                             tabIndex={0}

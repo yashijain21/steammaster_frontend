@@ -52,8 +52,8 @@ const Footer = () => {
                             About
                         </h6>
                         <Link to="/">Home</Link>
-                        <Link to="/services">Service</Link>
-                        <Link to="/contact">Contact</Link>
+                        <Link>Service</Link>
+                        <Link>Contact</Link>
                     </nav>
                     <nav className="flex flex-col gap-2">
                         <h6 className="font-semibold text-xl text-white mb-1">

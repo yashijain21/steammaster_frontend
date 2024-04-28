@@ -7,7 +7,9 @@ const ServicesSection = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        axios.get("/data/services.json").then((res) => setServices(res.data));
+        axios
+            .get("http://localhost:5000/services/min")
+            .then((res) => setServices(res.data));
     }, []);
 
     return (

@@ -30,7 +30,7 @@ const About = () => {
                         injected humour, or randomised words which don&apos;t
                         look even slightly believable.
                     </p>
-                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-primary hover:text-primary">
+                    <button className="btn bg-primary text-white border-primary hover:bg-transparent hover:border-primary hover:text-primary px-7">
                         Get More Info
                     </button>
                 </div>
