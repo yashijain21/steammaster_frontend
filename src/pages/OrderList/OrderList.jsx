@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const OrderList = () => {
     const { user } = useContext(AuthContext);
@@ -14,17 +15,19 @@ const OrderList = () => {
     }, [user]);
 
     return (
-        <div className="container mx-auto px-3 md:px-6 py-10">
+        <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
+            <PageTitle title="My Orders" breadcrumb="My Orders" />
             {orders.length ? (
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
                         <thead>
                             <tr>
-                                <th>Product / Service</th>
+                                <th>Order Name</th>
+                                <th>Order Type</th>
                                 <th>Price</th>
                                 <th>Status</th>
-                                <th>Order Details</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +36,7 @@ const OrderList = () => {
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
-                                                <div className="mask mask-squircle w-14 h-14">
+                                                <div className="rounded-xl w-20 h-20">
                                                     <img
                                                         src={order.order.img}
                                                         alt={order.order.title}
@@ -47,6 +50,7 @@ const OrderList = () => {
                                             </div>
                                         </div>
                                     </td>
+                                    <td>{order.order.type}</td>
                                     <td>${order.order.price}</td>
                                     <td>
                                         <span className="badge badge-ghost">
@@ -56,7 +60,7 @@ const OrderList = () => {
                                     <td>
                                         <Link
                                             to={`/order-details/${order._id}`}
-                                            className="btn"
+                                            className="btn btn-sm px-4 bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]"
                                         >
                                             Details
                                         </Link>

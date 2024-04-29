@@ -1,63 +1,110 @@
+import axios from "axios";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope, FaPhone } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const OrderDetails = () => {
     const order = useLoaderData();
+    const navigate = useNavigate();
+
+    const handleCancel = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Cancel Order!",
+            cancelButtonText: `No`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .delete(`http://localhost:5000/orders/${order._id}`)
+                    .then((res) => {
+                        console.log(res.data);
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Order Canceled!",
+                                text: "The Order has been canceled.",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 3000,
+                            });
+                            //order deleted, navigate to home
+                            navigate("/");
+                        }
+                    });
+            }
+        });
+    };
 
     return (
-        <div className="container mx-auto px-3 md:px-6 py-10 space-y-4">
-            <h1 className="font-bold text-3xl">Order Details</h1>
-            <div>
-                <img
-                    src={order.order.img}
-                    alt={order.order.title}
-                    className="w-96 rounded-lg"
-                />
-            </div>
-            <div className="overflow-x-auto">
-                <table className="table text-lg">
-                    <thead className="text-base">
-                        <tr>
-                            <th>Name</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span className="font-semibold">Order ID </span>
-                            </td>
-                            <td>{order._id}</td>
-                        </tr>
+        <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
+            <PageTitle title="Order Details" breadcrumb="Order Details" />
 
-                        <tr>
-                            <td>
-                                <span className="font-semibold">Product</span>
-                            </td>
-                            <td>{order.order.title}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span className="font-semibold">Price</span>
-                            </td>
-                            <td>${order.order.price}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span className="font-semibold">
-                                    Order Status
-                                </span>
-                            </td>
-                            <td>
-                                <span className="badge badge-ghost">
-                                    {order.order.status}
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                <div className="overflow-x-auto col-span-2 order-2 md:order-1">
+                    <table className="table text-lg">
+                        <thead className="text-base">
+                            <tr>
+                                <th>Name</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span className="font-semibold">
+                                        Order ID{" "}
+                                    </span>
+                                </td>
+                                <td>{order._id}</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span className="font-semibold">
+                                        {order.order.type}
+                                    </span>
+                                </td>
+                                <td>{order.order.title}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span className="font-semibold">Price</span>
+                                </td>
+                                <td>${order.order.price}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span className="font-semibold">
+                                        Order Status
+                                    </span>
+                                </td>
+                                <td>
+                                    <span className="badge badge-ghost">
+                                        {order.order.status}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="order-1 md:order-2 bg-[#F3F3F3] rounded-lg overflow-hidden">
+                    <img
+                        src={order.order.img}
+                        alt={order.order.title}
+                        className={
+                            order.order.type === "Product"
+                                ? "mx-auto w-2/3"
+                                : ""
+                        }
+                    />
+                </div>
             </div>
 
             <h1 className="font-bold text-2xl">Billing Address</h1>
@@ -73,7 +120,7 @@ const OrderDetails = () => {
                     {order.phone}
                 </li>
                 {order.phone2 && (
-                    <li className="text-xl lex gap-2 items-center">
+                    <li className="text-xl flex gap-2 items-center">
                         <FaPhone />
                         {order.phone2}
                     </li>
@@ -83,6 +130,12 @@ const OrderDetails = () => {
                     {order.email}
                 </li>
             </ul>
+            <button
+                onClick={handleCancel}
+                className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5"
+            >
+                Cancel Order
+            </button>
         </div>
     );
 };

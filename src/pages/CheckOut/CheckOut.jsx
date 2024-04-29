@@ -10,7 +10,7 @@ const CheckOut = () => {
     const location = useLocation();
     const checkout = useLoaderData();
     const navigate = useNavigate();
-    const { user, updateInfo } = useContext(AuthContext);
+    const { user, updateInfo, setLoading } = useContext(AuthContext);
     const [error, setError] = useState("");
     const [userOldData, setUserOldData] = useState();
 
@@ -40,7 +40,15 @@ const CheckOut = () => {
             phone,
             phone2,
             address,
-            order: { ...checkout, status: "Pending" },
+            order: {
+                ...checkout,
+                status: "Pending",
+                type: `${
+                    location.pathname.includes("service")
+                        ? "Service"
+                        : "Product"
+                }`,
+            },
         };
         const userData = { name, email, phone, phone2, address };
         console.log(order);
@@ -76,7 +84,10 @@ const CheckOut = () => {
                 displayName: name,
             };
             updateInfo(user, profile)
-                .then(() => console.log("profile updated on firebase"))
+                .then(() => {
+                    console.log("profile updated on firebase");
+                    setLoading(false);
+                })
                 .catch((error) => console.error(error.message));
         });
         axios.post("http://localhost:5000/orders", order).then((res) => {
@@ -196,7 +207,6 @@ const CheckOut = () => {
                         <img
                             src={checkout.img}
                             alt={checkout.title}
-                            // className="w-2/3 mx-auto"
                             className={`${
                                 location.pathname.includes("product")
                                     ? "w-2/3 mx-auto"

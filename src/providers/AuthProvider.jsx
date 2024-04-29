@@ -114,6 +114,7 @@ const AuthProvider = ({ children }) => {
         user,
         firebaseError,
         loading,
+        setLoading,
         googleLogin,
         twitterLogin,
         githubLogin,
