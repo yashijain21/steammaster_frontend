@@ -13,7 +13,7 @@ const PageTitle = ({ title, breadcrumb }) => {
             <div className="text-white w-full px-4 sm:px-10 md:pr-0 md:pl-20">
                 <h4 className="text-4xl font-bold">{title}</h4>
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 min-w-56 px-2 sm:px-7 trapezoid">
-                    <p className="text-sm w-full sm:text-xl font-medium text-transparent">
+                    <p className="text-sm w-full sm:text-xl font-medium text-transparent select-none">
                         Home/{breadcrumb}
                     </p>
                     <p className="text-sm w-full sm:text-xl font-medium absolute left-0 right-0 -bottom-9 sm:-bottom-10 text-center">

@@ -4,8 +4,10 @@ import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
-import CheckOut from "../pages/Home/CheckOut/CheckOut";
+import CheckOut from "../pages/CheckOut/CheckOut";
 import PrivetRoute from "./PrivetRoute";
+import OrderList from "../pages/OrderList/OrderList";
+import OrderDetails from "../pages/OrderDetails/OrderDetails";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +51,24 @@ const router = createBrowserRouter([
                 ),
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/products/${params.id}`),
+            },
+            {
+                path: "/orders",
+                element: (
+                    <PrivetRoute>
+                        <OrderList />
+                    </PrivetRoute>
+                ),
+            },
+            {
+                path: "/order-details/:id",
+                element: (
+                    <PrivetRoute>
+                        <OrderDetails />
+                    </PrivetRoute>
+                ),
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/orders/${params.id}`),
             },
         ],
     },

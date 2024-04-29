@@ -40,7 +40,6 @@ const SingleProduct = ({ product }) => {
                         type="radio"
                         name="rating-2"
                         className="mask mask-star-2 bg-orange-400"
-                        checked
                     />
                 </div>
                 <h2 className="text-dark2 font-bold text-2xl">

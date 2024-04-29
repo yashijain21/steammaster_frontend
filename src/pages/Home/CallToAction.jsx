@@ -22,10 +22,10 @@ const CallToAction = () => {
                 <div>
                     <p className="font-medium">Have a question?</p>
                     <a
-                        href="tel:+8801712885964"
+                        href="tel:+8801555021112"
                         className="font-bold text-xl xl:text-2xl"
                     >
-                        +880 1712 885964
+                        +880 1555 021112
                     </a>
                 </div>
             </div>
@@ -35,13 +35,9 @@ const CallToAction = () => {
                 </div>
                 <div>
                     <p className="font-medium">Need a repair? our address</p>
-                    <a
-                        href="https://maps.app.goo.gl/Gc2k2J4BXyEHCnZH8"
-                        target="_blank"
-                        className="font-bold text-xl xl:text-2xl"
-                    >
+                    <h3 className="font-bold text-xl xl:text-2xl">
                         East Mira Bazar, Sylhet
-                    </a>
+                    </h3>
                 </div>
             </div>
         </div>

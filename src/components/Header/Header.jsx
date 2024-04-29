@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { SlHandbag } from "react-icons/sl";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import userDefaultPicture from "/images/login/user.png";
-import { Link as ScrollLink } from "react-scroll";
+import { Bounce, toast } from "react-toastify";
+import formatFirebaseError from "../../utils/formatFirebaseError";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -22,27 +22,39 @@ const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     );
 };
 
-const SingleScroll = ({ scrollTitle, id, setIsMobileMenuOpen }) => {
+const SingleScroll = ({ ScrollTitle, id, setIsMobileMenuOpen }) => {
+    const navigate = useNavigate();
+    const handleScroll = () => {
+        navigate("/");
+        setIsMobileMenuOpen(false);
+        setTimeout(() => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                    duration: 500,
+                    offset: 15,
+                });
+            } else {
+                console.error(`Element with id ${id} not found`);
+            }
+        }, 150);
+    };
     return (
-        <ScrollLink
+        <button
+            onClick={handleScroll}
             className="font-medium lg:font-semibold text-lg text-[#444444] dark:text-gray-200 cursor-pointer"
-            to={id}
-            activeClass="active"
-            spy={true}
-            smooth={true}
-            offset={15}
-            duration={500}
-            onClick={() => setIsMobileMenuOpen(false)}
         >
-            {scrollTitle}
-        </ScrollLink>
+            {ScrollTitle}
+        </button>
     );
 };
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const dropdownRef = useRef();
     const { user, logOut } = useContext(AuthContext);
+    const dropdownRef = useRef();
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -70,23 +82,23 @@ const Header = () => {
             />
             <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                scrollTitle="Services"
                 id="services"
+                ScrollTitle="Services"
             />
             <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                scrollTitle="Products"
                 id="products"
+                ScrollTitle="Products"
             />
             <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                scrollTitle="About"
                 id="about"
+                ScrollTitle="About"
             />
             <SingleScroll
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
-                scrollTitle="Contact"
                 id="contact"
+                ScrollTitle="Contact"
             />
         </>
     );
@@ -94,9 +106,33 @@ const Header = () => {
     const handleLogOut = () => {
         logOut()
             .then(() => {
-                console.log("SignOut successful");
+                console.log("LogOut successful");
+                toast.success("LogOut Successful", {
+                    position: "top-right",
+                    autoClose: 500,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
+                });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                toast.error(formatFirebaseError(err), {
+                    position: "top-right",
+                    autoClose: 500,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
+                });
+            });
     };
 
     return (
@@ -115,12 +151,12 @@ const Header = () => {
                     <nav className="flex gap-7">{navLinks}</nav>
                 </div>
                 <div className="navbar-end">
-                    <div className="flex gap-1 mr-4">
-                        <div className="hidden sm:flex">
-                            <button className="btn btn-ghost btn-circle">
-                                <SlHandbag size={20} />
-                            </button>
-                        </div>
+                    <div className="flex items-center gap-3 mr-4">
+                        {user && (
+                            <Link to="/orders" className="font-semibold">
+                                My Orders
+                            </Link>
+                        )}
                         <div
                             role="button"
                             className="btn btn-ghost btn-circle avatar"
@@ -201,7 +237,7 @@ SingleNav.propTypes = {
 };
 
 SingleScroll.propTypes = {
-    scrollTitle: PropTypes.string.isRequired,
+    ScrollTitle: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     setIsMobileMenuOpen: PropTypes.func.isRequired,
 };
