@@ -44,7 +44,7 @@ const SingleScroll = ({ ScrollTitle, id, setIsMobileMenuOpen }) => {
     return (
         <button
             onClick={handleScroll}
-            className="font-medium lg:font-semibold text-lg text-[#444444] dark:text-gray-200 cursor-pointer"
+            className="font-medium lg:font-semibold text-lg text-left text-[#444444] dark:text-gray-200 cursor-pointer"
         >
             {ScrollTitle}
         </button>
@@ -100,6 +100,15 @@ const Header = () => {
                 id="contact"
                 ScrollTitle="Contact"
             />
+            {user && (
+                <div className="sm:hidden">
+                    <SingleNav
+                        setIsMobileMenuOpen={setIsMobileMenuOpen}
+                        pageTitle="My Orders"
+                        path="/orders"
+                    />
+                </div>
+            )}
         </>
     );
 
@@ -153,9 +162,16 @@ const Header = () => {
                 <div className="navbar-end">
                     <div className="flex items-center gap-3 mr-4">
                         {user && (
-                            <Link to="/orders" className="font-semibold">
+                            <NavLink
+                                to="/orders"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? "font-semibold text-primary dark:text-primary hidden sm:block"
+                                        : "font-semibold text-[#444444] dark:text-gray-200 hidden sm:block"
+                                }
+                            >
                                 My Orders
-                            </Link>
+                            </NavLink>
                         )}
                         <div
                             role="button"
