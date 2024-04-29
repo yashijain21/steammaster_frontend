@@ -159,19 +159,21 @@ const Header = () => {
                 <div className="navbar-center hidden lg:flex">
                     <nav className="flex gap-7">{navLinks}</nav>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end gap-1">
                     <div className="flex items-center gap-3 mr-4">
                         {user && (
-                            <NavLink
-                                to="/orders"
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? "font-semibold text-primary dark:text-primary hidden sm:block"
-                                        : "font-semibold text-[#444444] dark:text-gray-200 hidden sm:block"
-                                }
-                            >
-                                My Orders
-                            </NavLink>
+                            <div className="hidden sm:block">
+                                <NavLink
+                                    to="/orders"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "font-semibold text-primary dark:text-primary"
+                                            : "font-semibold text-[#444444] dark:text-gray-200"
+                                    }
+                                >
+                                    My Orders
+                                </NavLink>
+                            </div>
                         )}
                         <div
                             role="button"
