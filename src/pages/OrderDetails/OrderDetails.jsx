@@ -2,13 +2,16 @@ import axios from "axios";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope, FaPhone } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Navigate, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const OrderDetails = () => {
     const order = useLoaderData();
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
 
     const handleCancel = () => {
         Swal.fire({
@@ -42,10 +45,13 @@ const OrderDetails = () => {
         });
     };
 
+    if (user.email !== order.email) {
+        return <Navigate to="/orders" />;
+    }
+
     return (
         <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
             <PageTitle title="Order Details" breadcrumb="Order Details" />
-
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
                 <div className="overflow-x-auto col-span-2 order-2 md:order-1">
                     <table className="table text-lg">

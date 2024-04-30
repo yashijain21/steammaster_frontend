@@ -6,6 +6,7 @@ import formatFirebaseError from "../../utils/formatFirebaseError";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Bounce, toast } from "react-toastify";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -22,6 +23,12 @@ const Login = () => {
             setError(formatFirebaseError(firebaseError));
         }
     }, [firebaseError]);
+
+    const handleJWT = (user) => {
+        axios
+            .post("http://localhost:5000/jwt", user, { withCredentials: true })
+            .then((res) => console.log(res.data));
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -47,6 +54,9 @@ const Login = () => {
                     setError("Please verify your email");
                 } else {
                     location.state ? navigate(location.state) : navigate("/");
+
+                    const user = { email };
+                    handleJWT(user);
 
                     toast.success("Login Successful", {
                         position: "top-right",
@@ -169,7 +179,7 @@ const Login = () => {
                 <p className="text-center text-dark2 font-medium">
                     Or Sign In with
                 </p>
-                <LoginWith location={location} />
+                <LoginWith location={location} handleJWT={handleJWT} />
                 <p className="text-center text-[#737373]">
                     Don&apos;t have an account?{" "}
                     <Link to="/register" className="text-primary font-semibold">

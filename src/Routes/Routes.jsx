@@ -8,6 +8,7 @@ import CheckOut from "../pages/CheckOut/CheckOut";
 import PrivetRoute from "./PrivetRoute";
 import OrderList from "../pages/OrderList/OrderList";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
+import ManageOrders from "../pages/ManageOrders/ManageOrders";
 
 const router = createBrowserRouter([
     {
@@ -69,6 +70,14 @@ const router = createBrowserRouter([
                 ),
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/orders/${params.id}`),
+            },
+            {
+                path: "/manage-orders",
+                element: (
+                    <PrivetRoute>
+                        <ManageOrders />
+                    </PrivetRoute>
+                ),
             },
         ],
     },

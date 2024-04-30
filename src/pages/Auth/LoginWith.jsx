@@ -5,12 +5,17 @@ import { Bounce, toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-const LoginWith = ({ location }) => {
+const LoginWith = ({ location, handleJWT }) => {
     const navigate = useNavigate();
     const { googleLogin, twitterLogin, githubLogin } = useContext(AuthContext);
 
     const successTost = (result) => {
         console.log(result.user);
+
+        const email = result.user.email;
+        const user = { email };
+        handleJWT(user);
+
         toast.success("Login Successful", {
             position: "top-right",
             autoClose: 500,
@@ -111,6 +116,7 @@ const LoginWith = ({ location }) => {
 
 LoginWith.propTypes = {
     location: PropTypes.object.isRequired,
+    handleJWT: PropTypes.func.isRequired,
 };
 
 export default LoginWith;

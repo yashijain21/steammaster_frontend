@@ -10,7 +10,9 @@ const OrderList = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/orders?email=${user?.email}`)
+            .get(`http://localhost:5000/orders?email=${user?.email}`, {
+                withCredentials: true,
+            })
             .then((res) => setOrders(res.data));
     }, [user]);
 

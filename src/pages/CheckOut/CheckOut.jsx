@@ -20,7 +20,9 @@ const CheckOut = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/users?email=${user.email}`)
+            .get(`http://localhost:5000/users?email=${user.email}`, {
+                withCredentials: true,
+            })
             .then((res) => setUserOldData(res.data));
     }, [user]);
 
