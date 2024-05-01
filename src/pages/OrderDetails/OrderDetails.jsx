@@ -2,16 +2,29 @@ import axios from "axios";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope, FaPhone } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
-import { Navigate, useLoaderData, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import PageTitle from "../../components/PageTitle/PageTitle";
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import { ThreeDots } from "react-loader-spinner";
 
 const OrderDetails = () => {
-    const order = useLoaderData();
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
+    const { id } = useParams();
+
+    const {
+        data: order,
+        isPending,
+        isError,
+    } = useQuery({
+        queryKey: ["order-details"],
+        queryFn: async () => {
+            const res = await axios.get(`http://localhost:5000/orders/${id}`, {
+                withCredentials: true,
+            });
+            return res.data;
+        },
+    });
 
     const handleCancel = () => {
         Swal.fire({
@@ -45,7 +58,27 @@ const OrderDetails = () => {
         });
     };
 
-    if (user.email !== order.email) {
+    if (isPending) {
+        return (
+            <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
+                <PageTitle title="Order Details" breadcrumb="Order Details" />
+                <div className="min-h-[30vh] flex justify-center items-center">
+                    <ThreeDots
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="#403F3F"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    if (isError) {
         return <Navigate to="/orders" />;
     }
 

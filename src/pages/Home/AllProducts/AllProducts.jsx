@@ -1,16 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import SingleProduct from "./SingleProduct";
+import { useQuery } from "@tanstack/react-query";
 
 const AllProducts = () => {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get("http://localhost:5000/products")
-            .then((res) => setProducts(res.data));
-    }, []);
+    const { data: products, isPending } = useQuery({
+        queryKey: ["home-products"],
+        queryFn: async () => {
+            const res = await axios.get("http://localhost:5000/products", {
+                withCredentials: true,
+            });
+            return res.data;
+        },
+    });
 
     return (
         <div className="py-10 space-y-10" id="products">
@@ -20,9 +22,13 @@ const AllProducts = () => {
                 description="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products?.map((product) => (
-                    <SingleProduct key={product._id} product={product} />
-                ))}
+                {!isPending ? (
+                    products?.map((product) => (
+                        <SingleProduct key={product._id} product={product} />
+                    ))
+                ) : (
+                    <>Loading...</>
+                )}
             </div>
             <div className="text-center">
                 <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5">

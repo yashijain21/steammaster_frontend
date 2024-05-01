@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Ripple, initTWE } from "tw-elements";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const CheckOut = () => {
     const location = useLocation();
@@ -12,19 +13,23 @@ const CheckOut = () => {
     const navigate = useNavigate();
     const { user, updateInfo, setLoading } = useContext(AuthContext);
     const [error, setError] = useState("");
-    const [userOldData, setUserOldData] = useState();
 
     useEffect(() => {
         initTWE({ Ripple });
     }, []);
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5000/users?email=${user.email}`, {
-                withCredentials: true,
-            })
-            .then((res) => setUserOldData(res.data));
-    }, [user]);
+    const { data: userOldData } = useQuery({
+        queryKey: ["user-old-data"],
+        queryFn: async () => {
+            const res = await axios.get(
+                `http://localhost:5000/users?email=${user.email}`,
+                {
+                    withCredentials: true,
+                }
+            );
+            return res.data;
+        },
+    });
 
     console.log(userOldData);
 

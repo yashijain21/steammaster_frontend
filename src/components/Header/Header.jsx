@@ -3,8 +3,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import userDefaultPicture from "/images/login/user.png";
-import { Bounce, toast } from "react-toastify";
+import { Bounce, toast as toastify } from "react-toastify";
 import formatFirebaseError from "../../utils/formatFirebaseError";
+import toast from "react-hot-toast";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -116,21 +117,11 @@ const Header = () => {
         logOut()
             .then(() => {
                 console.log("LogOut successful");
-                toast.success("LogOut Successful", {
-                    position: "top-right",
-                    autoClose: 500,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    transition: Bounce,
-                });
+                toast.success("LogOut Successful");
             })
             .catch((err) => {
                 console.error(err);
-                toast.error(formatFirebaseError(err), {
+                toastify.error(formatFirebaseError(err), {
                     position: "top-right",
                     autoClose: 500,
                     hideProgressBar: true,
@@ -179,18 +170,18 @@ const Header = () => {
                             role="button"
                             className="btn btn-ghost btn-circle avatar"
                         >
-                            <div className="w-10 rounded-full">
-                                <img
-                                    alt="User Image"
-                                    src={
-                                        user
-                                            ? user.photoURL
+                            {user && (
+                                <div className="w-10 rounded-full">
+                                    <img
+                                        alt="User Image"
+                                        src={
+                                            user.photoURL
                                                 ? user.photoURL
                                                 : userDefaultPicture
-                                            : userDefaultPicture
-                                    }
-                                />
-                            </div>
+                                        }
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                     {user ? (

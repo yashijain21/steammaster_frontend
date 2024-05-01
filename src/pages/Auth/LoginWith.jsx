@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import formatFirebaseError from "../../utils/formatFirebaseError";
-import { Bounce, toast } from "react-toastify";
+import { Bounce, toast as toastify } from "react-toastify";
+import toast from "react-hot-toast";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
@@ -16,17 +17,7 @@ const LoginWith = ({ location, handleJWT }) => {
         const user = { email };
         handleJWT(user);
 
-        toast.success("Login Successful", {
-            position: "top-right",
-            autoClose: 500,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
-        });
+        toast.success("Login Successful");
         // navigate
         location.state ? navigate(location.state) : navigate("/");
     };
@@ -34,7 +25,7 @@ const LoginWith = ({ location, handleJWT }) => {
     const errorTost = (err) => {
         console.log(err.message);
         const errorMessage = formatFirebaseError(err);
-        toast.error(errorMessage, {
+        toastify.error(errorMessage, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: true,

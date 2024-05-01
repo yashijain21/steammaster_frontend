@@ -1,20 +1,46 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import { useQuery } from "@tanstack/react-query";
+import { ThreeDots } from "react-loader-spinner";
 
 const OrderList = () => {
     const { user } = useContext(AuthContext);
-    const [orders, setOrders] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5000/orders?email=${user?.email}`, {
-                withCredentials: true,
-            })
-            .then((res) => setOrders(res.data));
-    }, [user]);
+    const { data: orders, isPending } = useQuery({
+        queryKey: ["orders-list"],
+        queryFn: async () => {
+            const res = await axios.get(
+                `http://localhost:5000/orders?email=${user?.email}`,
+                {
+                    withCredentials: true,
+                }
+            );
+            return res.data;
+        },
+    });
+
+    if (isPending) {
+        return (
+            <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
+                <PageTitle title="My Orders" breadcrumb="My Orders" />
+                <div className="min-h-[30vh] flex justify-center items-center">
+                    <ThreeDots
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="#403F3F"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">

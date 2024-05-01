@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
+import { ThreeDots } from "react-loader-spinner";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageOrders = () => {
-    const [orders, setOrders] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get("http://localhost:5000/orders", {
+    const {
+        data: orders,
+        isPending,
+        refetch,
+    } = useQuery({
+        queryKey: ["manage-orders"],
+        queryFn: async () => {
+            const res = await axios.get("http://localhost:5000/orders", {
                 withCredentials: true,
-            })
-            .then((res) => setOrders(res.data));
-    }, []);
+            });
+            return res.data;
+        },
+    });
 
     const handleApprove = (order) => {
         console.log(order.order);
@@ -27,12 +32,32 @@ const ManageOrders = () => {
             })
             .then((res) => {
                 console.log(res.data);
-                const remaining = orders.filter((ord) => ord._id !== order._id);
-                const updateOrder = orders.find((ord) => ord._id === order._id);
-                updateOrder.order.status = "Approved";
-                setOrders([updateOrder, ...remaining]);
+                refetch();
             });
     };
+
+    if (isPending) {
+        return (
+            <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
+                <PageTitle
+                    title="Manage Orders (Admin)"
+                    breadcrumb="Manage Orders"
+                />
+                <div className="min-h-[30vh] flex justify-center items-center">
+                    <ThreeDots
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="#403F3F"
+                        radius="9"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
@@ -90,11 +115,16 @@ const ManageOrders = () => {
                                             >
                                                 Details
                                             </Link>
+
                                             <button
                                                 onClick={() =>
                                                     handleApprove(order)
                                                 }
                                                 className="btn btn-sm px-4 bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]"
+                                                disabled={
+                                                    order.order.status ===
+                                                    "Approved"
+                                                }
                                             >
                                                 Approve
                                             </button>

@@ -4,9 +4,9 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useContext, useEffect, useRef, useState } from "react";
 import formatFirebaseError from "../../utils/formatFirebaseError";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Bounce, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -58,17 +58,7 @@ const Login = () => {
                     const user = { email };
                     handleJWT(user);
 
-                    toast.success("Login Successful", {
-                        position: "top-right",
-                        autoClose: 500,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                        transition: Bounce,
-                    });
+                    toast.success("Login Successful");
                 }
             })
             .catch((err) => {
