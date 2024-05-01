@@ -21,14 +21,17 @@ const ManageOrders = () => {
 
     const handleApprove = (order) => {
         console.log(order.order);
+        const updatedOrder = {
+            _id: order.order._id,
+            title: order.order.title,
+            img: order.order.img,
+            price: order.order.price,
+            status: "Approved",
+            type: order.order.type,
+        };
         axios
-            .patch(`http://localhost:5000/orders/${order._id}`, {
-                _id: order.order._id,
-                title: order.order.title,
-                img: order.order.img,
-                price: order.order.price,
-                status: "Approved",
-                type: order.order.type,
+            .patch(`http://localhost:5000/orders/${order._id}`, updatedOrder, {
+                withCredentials: true,
             })
             .then((res) => {
                 console.log(res.data);

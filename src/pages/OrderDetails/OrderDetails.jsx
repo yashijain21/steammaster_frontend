@@ -39,7 +39,9 @@ const OrderDetails = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                    .delete(`http://localhost:5000/orders/${order._id}`)
+                    .delete(`http://localhost:5000/orders/${order._id}`, {
+                        withCredentials: true,
+                    })
                     .then((res) => {
                         console.log(res.data);
                         if (res.data.deletedCount > 0) {

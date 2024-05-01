@@ -84,34 +84,42 @@ const CheckOut = () => {
             return;
         }
         setError("");
-        axios.put("http://localhost:5000/users", userData).then((res) => {
-            console.log("user updated on database");
-            console.log(res.data);
-            const profile = {
-                displayName: name,
-            };
-            updateInfo(user, profile)
-                .then(() => {
-                    console.log("profile updated on firebase");
-                    setLoading(false);
-                })
-                .catch((error) => console.error(error.message));
-        });
-        axios.post("http://localhost:5000/orders", order).then((res) => {
-            console.log(res.data);
-            if (res.data.insertedId) {
-                navigate("/");
-                Swal.fire({
-                    icon: "success",
-                    title: "Order Confirmed!",
-                    text: `We will send your ${
-                        location.pathname.includes("service")
-                            ? "Service"
-                            : "Product"
-                    } soon.`,
-                });
-            }
-        });
+        axios
+            .put("http://localhost:5000/users", userData, {
+                withCredentials: true,
+            })
+            .then((res) => {
+                console.log("user updated on database");
+                console.log(res.data);
+                const profile = {
+                    displayName: name,
+                };
+                updateInfo(user, profile)
+                    .then(() => {
+                        console.log("profile updated on firebase");
+                        setLoading(false);
+                    })
+                    .catch((error) => console.error(error.message));
+            });
+        axios
+            .post("http://localhost:5000/orders", order, {
+                withCredentials: true,
+            })
+            .then((res) => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    navigate("/");
+                    Swal.fire({
+                        icon: "success",
+                        title: "Order Confirmed!",
+                        text: `We will send your ${
+                            location.pathname.includes("service")
+                                ? "Service"
+                                : "Product"
+                        } soon.`,
+                    });
+                }
+            });
     };
 
     return (
