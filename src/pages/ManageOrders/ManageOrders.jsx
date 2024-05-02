@@ -1,10 +1,11 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { ThreeDots } from "react-loader-spinner";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ManageOrders = () => {
+    const axiosSecure = useAxiosSecure();
     const {
         data: orders,
         isPending,
@@ -12,9 +13,7 @@ const ManageOrders = () => {
     } = useQuery({
         queryKey: ["manage-orders"],
         queryFn: async () => {
-            const res = await axios.get("http://localhost:5000/orders", {
-                withCredentials: true,
-            });
+            const res = await axiosSecure.get("/orders");
             return res.data;
         },
     });
@@ -29,14 +28,10 @@ const ManageOrders = () => {
             status: "Approved",
             type: order.order.type,
         };
-        axios
-            .patch(`http://localhost:5000/orders/${order._id}`, updatedOrder, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log(res.data);
-                refetch();
-            });
+        axiosSecure.patch(`/orders/${order._id}`, updatedOrder).then((res) => {
+            console.log(res.data);
+            refetch();
+        });
     };
 
     if (isPending) {

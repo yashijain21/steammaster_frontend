@@ -5,13 +5,14 @@ import { useContext, useEffect, useRef, useState } from "react";
 import formatFirebaseError from "../../utils/formatFirebaseError";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
-import axios from "axios";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const emailRef = useRef();
+    const axiosSecure = useAxiosSecure();
 
     const { signInWithPassword, firebaseError, passwordReset } =
         useContext(AuthContext);
@@ -25,9 +26,7 @@ const Login = () => {
     }, [firebaseError]);
 
     const handleJWT = (user) => {
-        axios
-            .post("http://localhost:5000/jwt", user, { withCredentials: true })
-            .then((res) => console.log(res.data));
+        axiosSecure.post("/jwt", user).then((res) => console.log(res.data));
     };
 
     const handleLogin = (e) => {

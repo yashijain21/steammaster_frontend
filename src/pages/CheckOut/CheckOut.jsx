@@ -3,9 +3,10 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Ripple, initTWE } from "tw-elements";
-import axios from "axios";
+
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const CheckOut = () => {
     const location = useLocation();
@@ -13,6 +14,7 @@ const CheckOut = () => {
     const navigate = useNavigate();
     const { user, updateInfo, setLoading } = useContext(AuthContext);
     const [error, setError] = useState("");
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
         initTWE({ Ripple });
@@ -21,12 +23,7 @@ const CheckOut = () => {
     const { data: userOldData } = useQuery({
         queryKey: ["user-old-data"],
         queryFn: async () => {
-            const res = await axios.get(
-                `http://localhost:5000/users?email=${user.email}`,
-                {
-                    withCredentials: true,
-                }
-            );
+            const res = await axiosSecure.get(`/users?email=${user.email}`);
             return res.data;
         },
     });
@@ -84,42 +81,34 @@ const CheckOut = () => {
             return;
         }
         setError("");
-        axios
-            .put("http://localhost:5000/users", userData, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log("user updated on database");
-                console.log(res.data);
-                const profile = {
-                    displayName: name,
-                };
-                updateInfo(user, profile)
-                    .then(() => {
-                        console.log("profile updated on firebase");
-                        setLoading(false);
-                    })
-                    .catch((error) => console.error(error.message));
-            });
-        axios
-            .post("http://localhost:5000/orders", order, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log(res.data);
-                if (res.data.insertedId) {
-                    navigate("/");
-                    Swal.fire({
-                        icon: "success",
-                        title: "Order Confirmed!",
-                        text: `We will send your ${
-                            location.pathname.includes("service")
-                                ? "Service"
-                                : "Product"
-                        } soon.`,
-                    });
-                }
-            });
+        axiosSecure.put("/users", userData).then((res) => {
+            console.log("user updated on database");
+            console.log(res.data);
+            const profile = {
+                displayName: name,
+            };
+            updateInfo(user, profile)
+                .then(() => {
+                    console.log("profile updated on firebase");
+                    setLoading(false);
+                })
+                .catch((error) => console.error(error.message));
+        });
+        axiosSecure.post("/orders", order).then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+                navigate("/");
+                Swal.fire({
+                    icon: "success",
+                    title: "Order Confirmed!",
+                    text: `We will send your ${
+                        location.pathname.includes("service")
+                            ? "Service"
+                            : "Product"
+                    } soon.`,
+                });
+            }
+        });
     };
 
     return (

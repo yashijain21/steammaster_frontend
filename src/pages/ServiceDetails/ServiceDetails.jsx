@@ -1,17 +1,19 @@
 import { Link, NavLink, useLoaderData } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { IoIosArrowRoundForward } from "react-icons/io";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ServiceDetails = () => {
     const service = useLoaderData();
     const [allServices, setAllServices] = useState([]);
+    const axiosSecure = useAxiosSecure();
     useEffect(() => {
-        axios
-            .get("http://localhost:5000/services/titles")
+        axiosSecure
+            .get("/services/titles")
             .then((res) => setAllServices(res.data));
-    }, []);
+    }, [axiosSecure]);
     return (
         <div className="container mx-auto px-3 md:px-6 pt-6 pb-10 space-y-16">
             <PageTitle title="Service Details" breadcrumb="Service Details" />

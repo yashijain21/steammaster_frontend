@@ -166,14 +166,18 @@ const Header = () => {
                                 </NavLink>
                             </div>
                         )}
-                        <div
-                            role="button"
-                            className="btn btn-ghost btn-circle avatar"
-                        >
-                            {user && (
+                        {user && (
+                            <div
+                                role="button"
+                                className="btn btn-ghost btn-circle avatar"
+                            >
                                 <div className="w-10 rounded-full">
                                     <img
-                                        alt="User Image"
+                                        alt={
+                                            user.displayName
+                                                ? user.displayName
+                                                : "User Image"
+                                        }
                                         src={
                                             user.photoURL
                                                 ? user.photoURL
@@ -181,8 +185,8 @@ const Header = () => {
                                         }
                                     />
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                     {user ? (
                         <button

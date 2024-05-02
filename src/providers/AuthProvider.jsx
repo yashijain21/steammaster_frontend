@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import Swal from "sweetalert2";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -64,6 +65,11 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true);
+        axios
+            .get("http://localhost:5000/logout", { withCredentials: true })
+            .then((res) => {
+                console.log(res.data);
+            });
         return signOut(auth);
     };
 

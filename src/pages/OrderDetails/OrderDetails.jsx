@@ -1,4 +1,3 @@
-import axios from "axios";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope, FaPhone } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
@@ -7,10 +6,12 @@ import Swal from "sweetalert2";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useQuery } from "@tanstack/react-query";
 import { ThreeDots } from "react-loader-spinner";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const OrderDetails = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const axiosSecure = useAxiosSecure();
 
     const {
         data: order,
@@ -19,9 +20,7 @@ const OrderDetails = () => {
     } = useQuery({
         queryKey: ["order-details"],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/orders/${id}`, {
-                withCredentials: true,
-            });
+            const res = await axiosSecure.get(`/orders/${id}`);
             return res.data;
         },
     });
@@ -38,24 +37,20 @@ const OrderDetails = () => {
             cancelButtonText: `No`,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
-                    .delete(`http://localhost:5000/orders/${order._id}`, {
-                        withCredentials: true,
-                    })
-                    .then((res) => {
-                        console.log(res.data);
-                        if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Order Canceled!",
-                                text: "The Order has been canceled.",
-                                icon: "success",
-                                showConfirmButton: false,
-                                timer: 3000,
-                            });
-                            //order deleted, navigate to home
-                            navigate("/");
-                        }
-                    });
+                axiosSecure.delete(`/orders/${order._id}`).then((res) => {
+                    console.log(res.data);
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Order Canceled!",
+                            text: "The Order has been canceled.",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 3000,
+                        });
+                        //order deleted, navigate to home
+                        navigate("/");
+                    }
+                });
             }
         });
     };

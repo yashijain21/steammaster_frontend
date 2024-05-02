@@ -8,8 +8,6 @@ const Features = () => {
         axios.get("/data/features.json").then((res) => setFeatures(res.data));
     }, []);
 
-
-
     return (
         <div className="py-10 space-y-10">
             <SectionTitle

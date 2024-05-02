@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../SectionTitle/SectionTitle";
-import axios from "axios";
+
 import SingleService from "./SingleService";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ServicesSection = () => {
     const [services, setServices] = useState([]);
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        axios
-            .get("http://localhost:5000/services/min")
-            .then((res) => setServices(res.data));
-    }, []);
+        axiosSecure.get("/services/min").then((res) => setServices(res.data));
+    }, [axiosSecure]);
 
     return (
         <div className="py-10 space-y-10" id="services">

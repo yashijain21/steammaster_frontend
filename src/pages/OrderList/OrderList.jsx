@@ -1,23 +1,19 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { useQuery } from "@tanstack/react-query";
 import { ThreeDots } from "react-loader-spinner";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const OrderList = () => {
     const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
 
     const { data: orders, isPending } = useQuery({
         queryKey: ["orders-list"],
         queryFn: async () => {
-            const res = await axios.get(
-                `http://localhost:5000/orders?email=${user?.email}`,
-                {
-                    withCredentials: true,
-                }
-            );
+            const res = await axiosSecure.get(`/orders?email=${user?.email}`);
             return res.data;
         },
     });

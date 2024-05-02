@@ -1,15 +1,14 @@
-import axios from "axios";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import SingleProduct from "./SingleProduct";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllProducts = () => {
+    const axiosSecure = useAxiosSecure();
     const { data: products, isPending } = useQuery({
         queryKey: ["home-products"],
         queryFn: async () => {
-            const res = await axios.get("http://localhost:5000/products", {
-                withCredentials: true,
-            });
+            const res = await axiosSecure.get("/products");
             return res.data;
         },
     });

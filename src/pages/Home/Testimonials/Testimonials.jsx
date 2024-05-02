@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../SectionTitle/SectionTitle";
-import axios from "axios";
 import TestimonialSingle from "./TestimonialSingle";
+import axios from "axios";
 
 const Testimonials = () => {
     const [testimonials, setTestimonials] = useState([]);
+
     useEffect(() => {
         axios
             .get("/data/testimonial.json")
