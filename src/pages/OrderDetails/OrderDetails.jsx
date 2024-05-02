@@ -15,7 +15,7 @@ const OrderDetails = () => {
 
     const {
         data: order,
-        isPending,
+        isFetching,
         isError,
     } = useQuery({
         queryKey: ["order-details"],
@@ -55,7 +55,7 @@ const OrderDetails = () => {
         });
     };
 
-    if (isPending) {
+    if (isFetching) {
         return (
             <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
                 <PageTitle title="Order Details" breadcrumb="Order Details" />

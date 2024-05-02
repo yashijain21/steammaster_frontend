@@ -10,7 +10,7 @@ const OrderList = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
-    const { data: orders, isPending } = useQuery({
+    const { data: orders, isFetching } = useQuery({
         queryKey: ["orders-list"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/orders?email=${user?.email}`);
@@ -18,7 +18,7 @@ const OrderList = () => {
         },
     });
 
-    if (isPending) {
+    if (isFetching) {
         return (
             <div className="container mx-auto px-3 md:px-6 py-10 space-y-10">
                 <PageTitle title="My Orders" breadcrumb="My Orders" />

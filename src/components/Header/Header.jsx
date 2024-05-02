@@ -56,6 +56,7 @@ const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { user, logOut } = useContext(AuthContext);
     const dropdownRef = useRef();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -114,6 +115,7 @@ const Header = () => {
     );
 
     const handleLogOut = () => {
+        navigate("/");
         logOut()
             .then(() => {
                 console.log("LogOut successful");
