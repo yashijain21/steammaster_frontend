@@ -12,5 +12,26 @@
         "image": "https://randomuser.me/api/portraits/men/62.jpg",
         "designation": "Happy Customer",
         "description": "I recently purchased some car parts from this website, and I couldn't be happier with the quality and service. The parts arrived quickly, and they were exactly what I needed. Highly recommended!"
+    },
+    {
+        "_id": "3",
+        "name": "Michael Johnson",
+        "image": "https://randomuser.me/api/portraits/men/32.jpg",
+        "designation": "DIY Mechanic",
+        "description": "As a DIY mechanic, I'm always on the lookout for reliable sources for car parts and accessories. This website has been a lifesaver for me. The wide range of products and competitive prices make it my first choice whenever I need something for my car projects."
+    },
+    {
+        "_id": "4",
+        "name": "Samantha Lee",
+        "image": "https://randomuser.me/api/portraits/women/57.jpg",
+        "designation": "Auto Repair Shop Owner",
+        "description": "Running an auto repair shop means I need access to high-quality parts at reasonable prices. This website has been my trusted supplier for years. Their prompt delivery and excellent customer service have helped me keep my customers happy and my business thriving."
+    },
+    {
+        "_id": "5",
+        "name": "David Brown",
+        "image": "https://randomuser.me/api/portraits/men/75.jpg",
+        "designation": "Racing Enthusiast",
+        "description": "As a racing enthusiast, I demand top performance from my car, and that means using the best parts available. This website has never disappointed me. Their selection of performance parts is unmatched, and their staff is always knowledgeable and helpful."
     }
 ]

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const TestimonialSingle = ({ testimonial }) => {
     return (
-        <div className="border border-gray-200 p-8 sm:p-12 rounded-lg flex flex-col gap-4 relative">
+        <div className="border border-gray-200 p-8 sm:p-12 rounded-lg flex flex-col gap-4 relative h-80 mx-2">
             <img
                 src="/icons/quote.svg"
                 alt="quote"

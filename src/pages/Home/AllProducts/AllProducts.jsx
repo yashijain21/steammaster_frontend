@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllProducts = () => {
     const axiosSecure = useAxiosSecure();
+
     const { data: products, isPending } = useQuery({
         queryKey: ["home-products"],
         queryFn: async () => {
