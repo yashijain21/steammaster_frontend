@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import PropTypes from "prop-types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
-function SampleNextArrow(props) {
+const SampleNextArrow = (props) => {
     const { onClick } = props;
     return (
         <button
@@ -16,17 +16,11 @@ function SampleNextArrow(props) {
             <FaArrowRight size={25} />
         </button>
     );
-}
+};
 
-function SamplePrevArrow(props) {
+const SamplePrevArrow = (props) => {
     const { onClick } = props;
     return (
-        // <div
-        //     className={className}
-        //     style={{ ...style, ...arrowStyles }}
-        //     onClick={onClick}
-        // />
-
         <button
             className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-32 -left-9"
             onClick={onClick}
@@ -34,7 +28,7 @@ function SamplePrevArrow(props) {
             <FaArrowLeft size={25} />
         </button>
     );
-}
+};
 
 const Testimonials = () => {
     const [testimonials, setTestimonials] = useState([]);
