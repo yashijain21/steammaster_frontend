@@ -9,11 +9,13 @@ import PrivetRoute from "./PrivetRoute";
 import OrderList from "../pages/OrderList/OrderList";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
 import ManageOrders from "../pages/ManageOrders/ManageOrders";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",

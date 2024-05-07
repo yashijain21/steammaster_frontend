@@ -81,14 +81,10 @@ const Testimonials = () => {
 };
 
 SampleNextArrow.propTypes = {
-    className: PropTypes.string,
-    style: PropTypes.object,
     onClick: PropTypes.func,
 };
 
 SamplePrevArrow.propTypes = {
-    className: PropTypes.string,
-    style: PropTypes.object,
     onClick: PropTypes.func,
 };
 
