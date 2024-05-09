@@ -6,8 +6,7 @@ import Slider from "react-slick";
 import PropTypes from "prop-types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
-const SampleNextArrow = (props) => {
-    const { onClick } = props;
+const SampleNextArrow = ({ onClick }) => {
     return (
         <button
             className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-32 -right-9"
@@ -18,8 +17,7 @@ const SampleNextArrow = (props) => {
     );
 };
 
-const SamplePrevArrow = (props) => {
-    const { onClick } = props;
+const SamplePrevArrow = ({ onClick }) => {
     return (
         <button
             className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-32 -left-9"
