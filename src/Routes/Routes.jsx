@@ -33,7 +33,9 @@ const router = createBrowserRouter([
                 path: "/service/:id",
                 element: <ServiceDetails />,
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/services/${params.id}`),
+                    fetch(
+                        `https://coffee-store-server-blue-ten.vercel.app/services/${params.id}`
+                    ),
             },
             {
                 path: "/service/:id/checkout",
@@ -43,7 +45,9 @@ const router = createBrowserRouter([
                     </PrivetRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/services/min/${params.id}`),
+                    fetch(
+                        `https://coffee-store-server-blue-ten.vercel.app/services/min/${params.id}`
+                    ),
             },
             {
                 path: "/product/:id/checkout",
@@ -53,7 +57,9 @@ const router = createBrowserRouter([
                     </PrivetRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/products/${params.id}`),
+                    fetch(
+                        `https://coffee-store-server-blue-ten.vercel.app/products/${params.id}`
+                    ),
             },
             {
                 path: "/orders",

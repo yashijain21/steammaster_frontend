@@ -67,7 +67,9 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
 
         axios
-            .get("http://localhost:5000/logout", { withCredentials: true })
+            .get("https://coffee-store-server-blue-ten.vercel.app/logout", {
+                withCredentials: true,
+            })
             .then((res) => {
                 console.log(res.data);
             });
