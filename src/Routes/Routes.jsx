@@ -34,7 +34,7 @@ const router = createBrowserRouter([
                 element: <ServiceDetails />,
                 loader: ({ params }) =>
                     fetch(
-                        `https://coffee-store-server-blue-ten.vercel.app/services/${params.id}`
+                        `https://car-doctor-server-orpin-one.vercel.app/services/${params.id}`
                     ),
             },
             {
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
                 ),
                 loader: ({ params }) =>
                     fetch(
-                        `https://coffee-store-server-blue-ten.vercel.app/services/min/${params.id}`
+                        `https://car-doctor-server-orpin-one.vercel.app/services/min/${params.id}`
                     ),
             },
             {
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 ),
                 loader: ({ params }) =>
                     fetch(
-                        `https://coffee-store-server-blue-ten.vercel.app/products/${params.id}`
+                        `https://car-doctor-server-orpin-one.vercel.app/products/${params.id}`
                     ),
             },
             {

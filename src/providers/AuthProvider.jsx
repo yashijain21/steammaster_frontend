@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
 
         axios
-            .get("https://coffee-store-server-blue-ten.vercel.app/logout", {
+            .get("https://car-doctor-server-orpin-one.vercel.app/logout", {
                 withCredentials: true,
             })
             .then((res) => {
