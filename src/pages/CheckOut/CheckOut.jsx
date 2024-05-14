@@ -21,7 +21,7 @@ const CheckOut = () => {
     }, []);
 
     const { data: userOldData } = useQuery({
-        queryKey: [`user-old-data-${user.email}`],
+        queryKey: ["user-old-data", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users?email=${user.email}`);
             return res.data;

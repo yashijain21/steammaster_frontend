@@ -18,7 +18,7 @@ const OrderDetails = () => {
         isFetching,
         isError,
     } = useQuery({
-        queryKey: [`order-details-${id}`],
+        queryKey: ["order-details", id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/orders/${id}`);
             return res.data;

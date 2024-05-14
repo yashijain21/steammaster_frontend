@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
 
         axios
-            .get("https://car-doctor-server-orpin-one.vercel.app/logout", {
+            .get("http://localhost:5000/logout", {
                 withCredentials: true,
             })
             .then((res) => {

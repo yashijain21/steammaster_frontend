@@ -11,7 +11,7 @@ const OrderList = () => {
     const axiosSecure = useAxiosSecure();
 
     const { data: orders, isPending } = useQuery({
-        queryKey: [`orders-list-${user.email}`],
+        queryKey: ["orders-list", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/orders?email=${user.email}`);
             return res.data;

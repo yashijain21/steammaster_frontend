@@ -33,9 +33,7 @@ const router = createBrowserRouter([
                 path: "/service/:id",
                 element: <ServiceDetails />,
                 loader: ({ params }) =>
-                    fetch(
-                        `https://car-doctor-server-orpin-one.vercel.app/services/${params.id}`
-                    ),
+                    fetch(`http://localhost:5000/services/${params.id}`),
             },
             {
                 path: "/service/:id/checkout",
@@ -45,9 +43,7 @@ const router = createBrowserRouter([
                     </PrivetRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(
-                        `https://car-doctor-server-orpin-one.vercel.app/services/min/${params.id}`
-                    ),
+                    fetch(`http://localhost:5000/services/min/${params.id}`),
             },
             {
                 path: "/product/:id/checkout",
@@ -57,9 +53,7 @@ const router = createBrowserRouter([
                     </PrivetRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(
-                        `https://car-doctor-server-orpin-one.vercel.app/products/${params.id}`
-                    ),
+                    fetch(`http://localhost:5000/products/${params.id}`),
             },
             {
                 path: "/orders",
