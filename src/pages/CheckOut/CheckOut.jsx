@@ -62,7 +62,7 @@ const CheckOut = () => {
         } else if (email === "") {
             setError("Please enter your Email address.");
             return;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
+        } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
             setError("Invalid email");
             return;
         } else if (phone === "") {
