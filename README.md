@@ -15,3 +15,10 @@ This is the frontend for the Car Doctor application, built using React. The fron
 - React
 - React Router
 - Axios for API requests
+
+## Admin Login
+
+To access the admin features, use the following credentials:
+
+- **Email:** admin@yt-google.com
+- **Password:** Admin@123
