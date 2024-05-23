@@ -1,8 +1,30 @@
-# React + Vite
+# Car Doctor Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Car Doctor application, built using React. The frontend provides a user interface for managing services, products, and orders, with authentication and authorization features.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User authentication with JWT
+- Role-based access control for admin features
+- Viewing and managing services and products
+- Placing and managing orders
+- Responsive design
+
+## Technologies Used
+
+- React
+- React Router
+- Axios for API requests
+
+## Admin Login
+
+To access the admin features, use the following credentials:
+
+- **Email:**
+   ```sh
+   admin@yt-google.com
+    ```
+- **Password:**
+   ```sh
+   Admin@123
+    ```
