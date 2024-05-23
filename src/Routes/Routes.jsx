@@ -11,6 +11,7 @@ import OrderDetails from "../pages/OrderDetails/OrderDetails";
 import ManageOrders from "../pages/ManageOrders/ManageOrders";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AdminRoute from "./AdminRoute";
+import { baseUrl } from "../hooks/useAxiosPublic";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
                 path: "/service/:id",
                 element: <ServiceDetails />,
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/services/${params.id}`),
+                    fetch(`${baseUrl}/services/${params.id}`),
             },
             {
                 path: "/service/:id/checkout",
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
                     </PrivetRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/services/min/${params.id}`),
+                    fetch(`${baseUrl}/services/min/${params.id}`),
             },
             {
                 path: "/product/:id/checkout",
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
                     </PrivetRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/products/${params.id}`),
+                    fetch(`${baseUrl}/products/${params.id}`),
             },
             {
                 path: "/orders",

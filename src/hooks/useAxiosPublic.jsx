@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const baseUrl = "http://localhost:5000";
+export const baseUrl = "https://car-doctor-server-orpin-one.vercel.app";
+// export const baseUrl = "http://localhost:5000";
 
 const axiosPublic = axios.create({
     baseURL: baseUrl,
