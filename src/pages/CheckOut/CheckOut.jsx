@@ -7,6 +7,7 @@ import { Ripple, initTWE } from "tw-elements";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAdmin from "../../hooks/useAdmin";
 
 const CheckOut = () => {
     const location = useLocation();
@@ -15,6 +16,7 @@ const CheckOut = () => {
     const { user, updateInfo, setLoading } = useContext(AuthContext);
     const [error, setError] = useState("");
     const axiosSecure = useAxiosSecure();
+    const { isAdmin } = useAdmin();
 
     useEffect(() => {
         initTWE({ Ripple });
@@ -192,6 +194,7 @@ const CheckOut = () => {
                             className="btn btn-block active:scale-95 bg-primary text-white border-primary hover:border-primary hover:bg-[#d62400]"
                             data-twe-ripple-init
                             data-twe-ripple-color="light"
+                            disabled={isAdmin}
                         >
                             Order Confirm
                         </button>
