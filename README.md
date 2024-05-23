@@ -22,9 +22,9 @@ To access the admin features, use the following credentials:
 
 - **Email:**
    ```sh
-    admin@yt-google.com
+   admin@yt-google.com
     ```
 - **Password:**
    ```sh
-    Admin@123
+   Admin@123
     ```
