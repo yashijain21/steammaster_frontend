@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
     GoogleAuthProvider,
-    TwitterAuthProvider,
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     sendEmailVerification,
@@ -12,10 +11,12 @@ import {
     signOut,
     updateProfile,
     GithubAuthProvider,
+    TwitterAuthProvider,
 } from "firebase/auth";
-import Swal from "sweetalert2";
+import displayError from "../utils/displayError";
 import auth from "../firebase/firebase.config";
-import axios from "axios";
+import checkEmail from "../utils/checkEmail";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext();
 
@@ -26,7 +27,7 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [firebaseError, setFirebaseError] = useState("");
+    const axiosPublic = useAxiosPublic();
 
     const googleLogin = () => {
         setLoading(true);
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }) => {
     };
 
     const updateInfo = (user, profile) => {
-        setLoading(true);
+        Object.assign(user, profile);
         return updateProfile(user, profile);
     };
 
@@ -65,65 +66,59 @@ const AuthProvider = ({ children }) => {
 
     const logOut = () => {
         setLoading(true);
-
-        axios
-            .get("http://localhost:5000/logout", {
-                withCredentials: true,
-            })
-            .then((res) => {
-                console.log(res.data);
-            });
         return signOut(auth);
     };
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("currentUser ", currentUser);
-            setFirebaseError("");
             if (currentUser) {
+                setUser(currentUser);
+                const email = currentUser.email;
+                axiosPublic.post("/jwt", { email }).then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                });
+                // verify email
                 if (!currentUser.emailVerified) {
                     sendEmailVerification(currentUser)
                         .then(() => {
-                            Swal.fire({
-                                title: "Please verify Your Email",
-                                text: `Check your ${currentUser.email} for a link to verify your email address.`,
-                                imageUrl: "/images/email/mail.png",
-                                imageWidth: 128,
-                                imageHeight: 128,
-                                imageAlt: "Email",
-                            });
+                            checkEmail(
+                                currentUser.email,
+                                "to verify your email"
+                            );
+
                             signOut(auth)
                                 .then(() => {
                                     console.log("user not verified");
                                 })
                                 .catch((err) => {
                                     console.log(err.message);
-                                    setFirebaseError(err);
+                                    displayError(err);
                                 });
+                            setUser(null);
                         })
                         .catch((err) => {
                             console.log(err.message);
-                            setFirebaseError(err);
+                            displayError(err);
                         });
-                } else {
-                    setUser(currentUser);
-                    setLoading(false);
                 }
             } else {
                 setUser(null);
-                setLoading(false);
+                axiosPublic.get("/logout").then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                });
             }
         });
         return () => {
             unSubscribe();
         };
-    }, [user]);
+    }, [user, axiosPublic]);
 
     const authInfo = {
         user,
-        firebaseError,
         loading,
-        setLoading,
         googleLogin,
         twitterLogin,
         githubLogin,

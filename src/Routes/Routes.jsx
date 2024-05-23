@@ -10,6 +10,7 @@ import OrderList from "../pages/OrderList/OrderList";
 import OrderDetails from "../pages/OrderDetails/OrderDetails";
 import ManageOrders from "../pages/ManageOrders/ManageOrders";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -74,9 +75,9 @@ const router = createBrowserRouter([
             {
                 path: "/manage-orders",
                 element: (
-                    <PrivetRoute>
+                    <AdminRoute>
                         <ManageOrders />
-                    </PrivetRoute>
+                    </AdminRoute>
                 ),
             },
         ],

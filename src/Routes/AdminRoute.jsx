@@ -2,16 +2,18 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { AuthContext } from "../providers/AuthProvider";
 import { Bounce, toast } from "react-toastify";
+import { AuthContext } from "../providers/AuthProvider";
+import useAdmin from "../hooks/useAdmin";
 
-const PrivetRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
     const location = useLocation();
     const { user, loading } = useContext(AuthContext);
+    const { isAdmin, isAdminLoading } = useAdmin();
 
-    if (loading) {
+    if (loading || isAdminLoading) {
         return (
-            <div className="min-h-[50vh] flex justify-center items-center">
+            <div className="min-h-screen flex justify-center items-center">
                 <ThreeDots
                     visible={true}
                     height="80"
@@ -26,11 +28,11 @@ const PrivetRoute = ({ children }) => {
         );
     }
 
-    if (user) {
+    if (user && isAdmin) {
         return children;
     }
 
-    toast.warn("Access Denied, Please Login", {
+    toast.warn("Access Denied", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: true,
@@ -42,11 +44,11 @@ const PrivetRoute = ({ children }) => {
         transition: Bounce,
     });
 
-    return <Navigate state={location.pathname} to="/login"></Navigate>;
+    return <Navigate state={location.pathname} to="/"></Navigate>;
 };
 
-PrivetRoute.propTypes = {
+AdminRoute.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-export default PrivetRoute;
+export default AdminRoute;

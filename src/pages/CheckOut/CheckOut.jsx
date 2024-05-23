@@ -23,24 +23,22 @@ const CheckOut = () => {
     const { data: userOldData } = useQuery({
         queryKey: ["user-old-data", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users?email=${user.email}`);
+            const res = await axiosSecure.get(`/users/${user.email}`);
             return res.data;
         },
     });
-
-    console.log(userOldData);
 
     const handleCheckOut = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const name = form.get("name");
-        const email = form.get("email");
+
         const phone = form.get("phone");
         const phone2 = form.get("phone2");
         const address = form.get("address");
         const order = {
             name,
-            email,
+            email: user.email,
             phone,
             phone2,
             address,
@@ -54,16 +52,10 @@ const CheckOut = () => {
                 }`,
             },
         };
-        const userData = { name, email, phone, phone2, address };
+        const userData = { name, phone, phone2, address };
         console.log(order);
         if (name === "") {
             setError("Please enter your Name.");
-            return;
-        } else if (email === "") {
-            setError("Please enter your Email address.");
-            return;
-        } else if (!/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-            setError("Invalid email");
             return;
         } else if (phone === "") {
             setError("Please enter your Phone Number");
@@ -81,7 +73,7 @@ const CheckOut = () => {
             return;
         }
         setError("");
-        axiosSecure.put("/users", userData).then((res) => {
+        axiosSecure.patch("/users", userData).then((res) => {
             console.log("user updated on database");
             console.log(res.data);
             const profile = {

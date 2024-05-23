@@ -6,19 +6,15 @@ import toast from "react-hot-toast";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-const LoginWith = ({ location, handleJWT }) => {
+const LoginWith = ({ location }) => {
     const navigate = useNavigate();
     const { googleLogin, twitterLogin, githubLogin } = useContext(AuthContext);
 
     const successTost = (result) => {
         console.log(result.user);
 
-        const email = result.user.email;
-        const user = { email };
-        handleJWT(user);
-
         toast.success("Login Successful");
-        // navigate
+
         location.state ? navigate(location.state) : navigate("/");
     };
 
@@ -107,7 +103,6 @@ const LoginWith = ({ location, handleJWT }) => {
 
 LoginWith.propTypes = {
     location: PropTypes.object.isRequired,
-    handleJWT: PropTypes.func.isRequired,
 };
 
 export default LoginWith;

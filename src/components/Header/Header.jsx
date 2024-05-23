@@ -6,6 +6,7 @@ import userDefaultPicture from "/images/login/user.png";
 import { Bounce, toast as toastify } from "react-toastify";
 import formatFirebaseError from "../../utils/formatFirebaseError";
 import toast from "react-hot-toast";
+import useAdmin from "../../hooks/useAdmin";
 
 const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
     return (
@@ -57,6 +58,7 @@ const Header = () => {
     const { user, logOut } = useContext(AuthContext);
     const dropdownRef = useRef();
     const navigate = useNavigate();
+    const { isAdmin } = useAdmin();
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -154,7 +156,7 @@ const Header = () => {
                 </div>
                 <div className="navbar-end gap-1">
                     <div className="flex items-center gap-3 mr-4">
-                        {user && (
+                        {user && !isAdmin && (
                             <div className="hidden sm:block">
                                 <NavLink
                                     to="/orders"
@@ -165,6 +167,20 @@ const Header = () => {
                                     }
                                 >
                                     My Orders
+                                </NavLink>
+                            </div>
+                        )}
+                        {user && isAdmin && (
+                            <div className="hidden sm:block">
+                                <NavLink
+                                    to="/manage-orders"
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? "font-semibold text-primary dark:text-primary"
+                                            : "font-semibold text-[#444444] dark:text-gray-200"
+                                    }
+                                >
+                                    Manage Orders
                                 </NavLink>
                             </div>
                         )}
