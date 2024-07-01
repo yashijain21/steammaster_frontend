@@ -14,7 +14,20 @@ This is the frontend for the Car Doctor application, built using React. The fron
 
 - React
 - React Router
-- Axios for API requests
+- Axios
+- @tanstack/react-query
+- Firebase
+- prop-types
+- react-hot-toast
+- react-icons
+- react-loader-spinner
+- react-scroll
+- react-slick
+- react-toastify
+- slick-carousel
+- sweetalert2
+- tw-elements
+
 
 ## Admin Login
 
