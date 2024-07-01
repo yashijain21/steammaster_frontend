@@ -3,6 +3,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 
 import SingleService from "./SingleService";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loader from "../../../components/Loader/Loader";
 
 const ServicesSection = () => {
     const [services, setServices] = useState([]);
@@ -19,11 +20,15 @@ const ServicesSection = () => {
                 title="Our Service Area"
                 description="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable."
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {services?.map((service) => (
-                    <SingleService key={service._id} service={service} />
-                ))}
-            </div>
+            {services.length ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {services?.map((service) => (
+                        <SingleService key={service._id} service={service} />
+                    ))}
+                </div>
+            ) : (
+                <Loader />
+            )}
             <div className="text-center">
                 <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5">
                     More Services

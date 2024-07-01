@@ -2,6 +2,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import SingleProduct from "./SingleProduct";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loader from "../../../components/Loader/Loader";
 
 const AllProducts = () => {
     const axiosSecure = useAxiosSecure();
@@ -21,15 +22,15 @@ const AllProducts = () => {
                 title="Browse Our Products"
                 description="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {!isPending ? (
-                    products?.map((product) => (
+            {!isPending ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {products?.map((product) => (
                         <SingleProduct key={product._id} product={product} />
-                    ))
-                ) : (
-                    <>Loading...</>
-                )}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <Loader />
+            )}
             <div className="text-center">
                 <button className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5">
                     More Products

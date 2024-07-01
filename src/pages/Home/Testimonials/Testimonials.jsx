@@ -5,6 +5,7 @@ import axios from "axios";
 import Slider from "react-slick";
 import PropTypes from "prop-types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
+import Loader from "../../../components/Loader/Loader";
 
 const SampleNextArrow = ({ onClick }) => {
     return (
@@ -64,16 +65,20 @@ const Testimonials = () => {
                 title="What Customer Says"
                 description="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "
             />
-            <div className="slider-container relative">
-                <Slider {...settings}>
-                    {testimonials?.map((testimonial) => (
-                        <TestimonialSingle
-                            key={testimonial._id}
-                            testimonial={testimonial}
-                        />
-                    ))}
-                </Slider>
-            </div>
+            {testimonials.length ? (
+                <div className="slider-container relative">
+                    <Slider {...settings}>
+                        {testimonials?.map((testimonial) => (
+                            <TestimonialSingle
+                                key={testimonial._id}
+                                testimonial={testimonial}
+                            />
+                        ))}
+                    </Slider>
+                </div>
+            ) : (
+                <Loader />
+            )}
         </div>
     );
 };
