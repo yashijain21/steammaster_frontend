@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Car Doctor Frontend
 
 This is the frontend for the Car Doctor application, built using React. The frontend provides a user interface for managing services, products, and orders, with authentication and authorization features.
@@ -41,3 +42,6 @@ To access the admin features, use the following credentials:
    ```sh
    Admin@123
     ```
+=======
+# steammaster_frontend
+>>>>>>> aafe42fb36ffc58a6ba6d66d0bfeac42affbfbbe
