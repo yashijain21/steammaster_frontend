@@ -12,7 +12,7 @@ import WhyChooseUs from "./WhyChooseUs";
 import MarqueeText from "./Marquee";
 const Home = () => {
     return (
-        <div className="container barlow-regular">
+        <div className=" barlow-regular">
             <Slider />
             <Filter/>
             <About />

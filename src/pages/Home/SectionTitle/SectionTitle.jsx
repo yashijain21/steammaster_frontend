@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 const SectionTitle = ({ section, title, description }) => {
     return (
         <div className="space-y-4 text-center barlow-regular">
-            <h4 className="font-bold text-xl text-primary barlow-regular">{section}</h4>
-            <h1 className="text-4xl md:text-5xl font-bold text-secondary barlow-regular">{title}</h1>
+            <h4 className="font-bold text-xl text-secondary barlow-regular">{section}</h4>
+            <h1 className="text-4xl md:text-5xl font-bold text-primary barlow-regular">{title}</h1>
             <p className="w-2/3 mx-auto barlow-regular">{description}</p>
         </div>
     );

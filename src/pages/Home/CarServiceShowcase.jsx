@@ -37,10 +37,10 @@ const CarServicesShowcase = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-secondary sm:text-4xl">
             Våra Premiumtjänster
           </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-primary sm:mt-4">
             Professionell bilvård som ger synliga resultat
           </p>
         </div>
