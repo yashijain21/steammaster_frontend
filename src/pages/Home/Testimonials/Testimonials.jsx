@@ -7,10 +7,11 @@ import PropTypes from "prop-types";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import Loader from "../../../components/Loader/Loader";
 
+// Updated Arrows - Centered Vertically
 const SampleNextArrow = ({ onClick }) => {
     return (
         <button
-            className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-32 -right-9"
+            className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-1/2 -translate-y-1/2 -right-5"
             onClick={onClick}
         >
             <FaArrowRight size={25} />
@@ -21,7 +22,7 @@ const SampleNextArrow = ({ onClick }) => {
 const SamplePrevArrow = ({ onClick }) => {
     return (
         <button
-            className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-32 -left-9"
+            className="flex justify-center items-center bg-[#f3f3f3] text-[#444] hover:bg-primary transition-all h-14 w-14 md:h-20 md:w-20 rounded-full hover:text-white z-20 absolute top-1/2 -translate-y-1/2 -left-5"
             onClick={onClick}
         >
             <FaArrowLeft size={25} />
@@ -32,7 +33,7 @@ const SamplePrevArrow = ({ onClick }) => {
 const Testimonials = () => {
     const [testimonials, setTestimonials] = useState([]);
 
-    var settings = {
+    const settings = {
         dots: false,
         infinite: true,
         autoplay: true,
@@ -45,7 +46,7 @@ const Testimonials = () => {
         prevArrow: <SamplePrevArrow />,
         responsive: [
             {
-                breakpoint: 480,
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 1,
                 },
@@ -58,17 +59,18 @@ const Testimonials = () => {
             .get("/data/testimonial.json")
             .then((res) => setTestimonials(res.data));
     }, []);
+
     return (
-        <div className="py-10 space-y-10">
+        <div className="py-10 space-y-10 barlow-regular">
             <SectionTitle
-                section="Testimonial"
-                title="What Customer Says"
-                description="the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "
+                section="Kundomdömen"
+                title="Vad våra kunder säger"
+                description="De flesta av våra kunder är mycket nöjda med våra tjänster – professionellt bemötande och imponerande resultat varje gång."
             />
             {testimonials.length ? (
-                <div className="slider-container relative">
+                <div className="relative overflow-hidden">
                     <Slider {...settings}>
-                        {testimonials?.map((testimonial) => (
+                        {testimonials.map((testimonial) => (
                             <TestimonialSingle
                                 key={testimonial._id}
                                 testimonial={testimonial}

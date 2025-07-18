@@ -1,15 +1,18 @@
 import axios from "axios";
 
-export const baseUrl = "https://car-doctor-server-orpin-one.vercel.app";
-// export const baseUrl = "http://localhost:5000";
+// 🌐 Base URL for Render-deployed backend
+export const baseUrl = "https://steammaster-backend-2.onrender.com/api";
 
 const axiosPublic = axios.create({
-    baseURL: baseUrl,
-    withCredentials: true,
+  baseURL: baseUrl,
+  withCredentials: false, // Set to true only if you're using cookies/session-based auth
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 const useAxiosPublic = () => {
-    return axiosPublic;
+  return axiosPublic;
 };
 
 export default useAxiosPublic;

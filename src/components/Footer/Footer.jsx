@@ -4,25 +4,26 @@ import { Link as ScrollLink } from "react-scroll";
 
 const Footer = () => {
     return (
-        <footer className="bg-[#151515]">
+        <footer className="bg-[#151515] barlow-regular">
             <div className="grid grid-cols-1 lg:grid-cols-4 lg:gap-4 text-center lg:text-left text-dark6 container mx-auto px-3 md:px-6 py-20">
                 <aside className="space-y-3 mb-6 lg:mb-0">
                     <div>
                         <Link to="/">
                             <img
                                 className="w-24 mx-auto lg:mx-0"
-                                src="/logo-white.svg"
-                                alt="logo"
+                                src="/logo.png"
+                                alt="Steam Master Logo"
                             />
                         </Link>
                     </div>
                     <p>
-                        Edwin Diaz is a software and web technologies engineer,
-                        a life coach trainer who is also a serial .
+                        Steam Master är din pålitliga partner för professionell bilvård i Göteborg. Vi erbjuder tjänster av högsta kvalitet med fokus på detaljer, kundservice och hållbarhet.
                     </p>
                     <div className="space-x-2">
                         <a
-                            href="#"
+                            href="https://www.google.com/search?q=steam+master+bilv%C3%A5rd+g%C3%B6teborg"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-[#2d2d2d] hover:bg-[#535353] transition-all w-10 h-10 rounded-full inline-flex justify-center items-center"
                         >
                             <FaGoogle />
@@ -34,7 +35,9 @@ const Footer = () => {
                             <FaTwitter />
                         </a>
                         <a
-                            href="#"
+                            href="https://www.instagram.com/steammastergbg/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="bg-[#2d2d2d] hover:bg-[#535353] transition-all w-10 h-10 rounded-full inline-flex justify-center items-center"
                         >
                             <FaInstagram />
@@ -47,35 +50,38 @@ const Footer = () => {
                         </a>
                     </div>
                 </aside>
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-3 ">
+
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 col-span-3">
                     <nav className="flex flex-col gap-2 lg:ml-12">
                         <h6 className="font-semibold text-xl text-white mb-1">
-                            Pages
+                            Sidor
                         </h6>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Start</Link>
                         <ScrollLink className="cursor-pointer" to="services">
-                            Service
+                            Tjänster
                         </ScrollLink>
                         <ScrollLink className="cursor-pointer" to="contact">
-                            Contact
+                            Kontakt
                         </ScrollLink>
                     </nav>
+
                     <nav className="flex flex-col gap-2">
                         <h6 className="font-semibold text-xl text-white mb-1">
-                            Company
+                            Företaget
                         </h6>
-                        <Link>Why Car Doctor</Link>
-                        <ScrollLink className="cursor-pointer" to="about">
-                            About
+                        <Link to="/about">Om Oss</Link>
+                        <ScrollLink className="cursor-pointer" to="why-us">
+                            Varför Välja Oss
                         </ScrollLink>
                     </nav>
+
                     <nav className="flex flex-col gap-2">
                         <h6 className="font-semibold text-xl text-white mb-1">
                             Support
                         </h6>
-                        <Link>Support Center</Link>
-                        <Link>Feedback</Link>
-                        <Link>Accessability</Link>
+                        <Link to="/support">Supportcenter</Link>
+                        <Link to="/feedback">Lämna Feedback</Link>
+                        <Link to="/accessibility">Tillgänglighet</Link>
                     </nav>
                 </div>
             </div>

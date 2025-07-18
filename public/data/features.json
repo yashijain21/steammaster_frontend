@@ -1,32 +1,32 @@
 [
-    {
-        "_id": 1,
-        "name": "Expert Team",
-        "icon": "icons/group.svg"
-    },
-    {
-        "_id": 2,
-        "name": "Timely Delivery",
-        "icon": "icons/clock.svg"
-    },
-    {
-        "_id": 3,
-        "name": "24/7 Support",
-        "icon": "icons/person.svg"
-    },
-    {
-        "_id": 4,
-        "name": "Best Equipment",
-        "icon": "icons/Wrench.svg"
-    },
-    {
-        "_id": 5,
-        "name": "100% Guaranty",
-        "icon": "icons/check.svg"
-    },
-    {
-        "_id": 6,
-        "name": "Timely Delivery",
-        "icon": "icons/delivery.svg"
-    }
+  {
+    "_id": 1,
+    "name": "Erfarent Team",
+    "icon": "icons/group.svg"
+  },
+  {
+    "_id": 2,
+    "name": "Snabb Leverans",
+    "icon": "icons/clock.png"
+  },
+  {
+    "_id": 3,
+    "name": "Support Dygnet Runt",
+    "icon": "icons/person.svg"
+  },
+  {
+    "_id": 4,
+    "name": "Bästa Utrustningen",
+    "icon": "icons/wrench.svg"
+  },
+  {
+    "_id": 5,
+    "name": "100% Nöjdhetsgaranti",
+    "icon": "icons/check.svg"
+  },
+  {
+    "_id": 6,
+    "name": "Snabb Leverans",
+    "icon": "icons/delivery.svg"
+  }
 ]

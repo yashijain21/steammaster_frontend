@@ -1,276 +1,110 @@
-import PropTypes from "prop-types";
-import { useContext, useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
-import userDefaultPicture from "/images/login/user.png";
-import { Bounce, toast as toastify } from "react-toastify";
-import formatFirebaseError from "../../utils/formatFirebaseError";
-import toast from "react-hot-toast";
-import useAdmin from "../../hooks/useAdmin";
-
-const SingleNav = ({ pageTitle, path, setIsMobileMenuOpen }) => {
-    return (
-        <NavLink
-            className={({ isActive }) =>
-                isActive
-                    ? "font-medium lg:font-semibold text-lg text-primary dark:text-primary"
-                    : "font-medium lg:font-semibold text-lg text-[#444444] dark:text-gray-200"
-            }
-            to={path}
-            onClick={() => setIsMobileMenuOpen(false)}
-        >
-            {pageTitle}
-        </NavLink>
-    );
-};
-
-const SingleScroll = ({ ScrollTitle, id, setIsMobileMenuOpen }) => {
-    const navigate = useNavigate();
-    const handleScroll = () => {
-        navigate("/");
-        setIsMobileMenuOpen(false);
-        setTimeout(() => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                    duration: 500,
-                    offset: 15,
-                });
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        }, 150);
-    };
-    return (
-        <button
-            onClick={handleScroll}
-            className="font-medium lg:font-semibold text-lg text-left text-[#444444] dark:text-gray-200 cursor-pointer"
-        >
-            {ScrollTitle}
-        </button>
-    );
-};
+import { Link, NavLink } from "react-router-dom";
+import { FaSearch, FaUser } from "react-icons/fa";
+import { useState } from "react";
+import { Link as ScrollLink } from "react-scroll";
 
 const Header = () => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { user, logOut } = useContext(AuthContext);
-    const dropdownRef = useRef();
-    const navigate = useNavigate();
-    const { isAdmin } = useAdmin();
+  const [searchOpen, setSearchOpen] = useState(false);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                setIsMobileMenuOpen(false);
-            }
-        };
-        if (isMobileMenuOpen) {
-            document.addEventListener("click", handleClickOutside);
-        }
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, [isMobileMenuOpen]);
+  return (
+    <header className="w-full bg-white shadow-sm top-0 z-50 px-24">
+      {/* Top Bar */}
+      <div className="border-b border-gray-200">
+        <div className="flex items-center justify-between px-6 py-3 mx-auto">
+          {/* Left - Logo */}
+          <div className="flex-shrink-0">
+            <Link
+              to="/"
+              className="flex items-center gap-2 transition-transform hover:scale-105"
+            >
+              <img
+                src="/logo.png"
+                alt="Poseidon"
+                className="h-16 w-auto"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    "https://via.placeholder.com/150?text=Poseidon";
+                }}
+              />
+            </Link>
+          </div>
 
-    const navLinks = (
-        <>
-            <SingleNav
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                pageTitle="Home"
-                path="/"
-            />
-            <SingleScroll
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                id="services"
-                ScrollTitle="Services"
-            />
-            <SingleScroll
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                id="products"
-                ScrollTitle="Products"
-            />
-            <SingleScroll
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                id="about"
-                ScrollTitle="About"
-            />
-            <SingleScroll
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-                id="contact"
-                ScrollTitle="Contact"
-            />
-            {user && (
-                <div className="sm:hidden">
-                    <SingleNav
-                        setIsMobileMenuOpen={setIsMobileMenuOpen}
-                        pageTitle="My Orders"
-                        path="/orders"
-                    />
+          {/* Center - Nav Items */}
+          <nav className="hidden md:flex items-center justify-center gap-8 text-sm font-medium">
+            {[
+              { label: "Hem", id: "home" },
+              { label: "Tjänster", id: "services" },
+              { label: "Om Oss", id: "about" },
+              { label: "Kontakt", id: "contact" },
+            ].map(({ label, id }) => (
+              <ScrollLink
+                key={id}
+                to={id}
+                smooth={true}
+                duration={600}
+                offset={-80}
+                spy={true}
+                activeClass="text-secondary font-semibold"
+                className="cursor-pointer px-1 py-2 transition-colors duration-300 relative group text-gray-600 hover:text-secondary"
+              >
+                {label}
+                <span className="absolute bottom-0 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+              </ScrollLink>
+            ))}
+          </nav>
+
+          {/* Right - Sign In & Search */}
+          <div className="flex items-center gap-4">
+            <Link
+              to="/login"
+              className="hidden sm:flex items-center gap-2 border border-gray-300 px-4 py-1.5 rounded-full hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 transition-all duration-300 text-sm font-medium"
+            >
+              <FaUser className="text-sm" />
+              Logga in
+            </Link>
+
+            <div className="relative">
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="p-2 text-gray-600 hover:text-blue-500 transition-colors duration-300"
+              >
+                <FaSearch />
+              </button>
+
+              {searchOpen && (
+                <div className="absolute right-0 top-full mt-2 w-64 bg-white shadow-lg rounded-md p-2 z-10 animate-fadeIn">
+                  <input
+                    type="text"
+                    placeholder="Sök..."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    autoFocus
+                  />
                 </div>
-            )}
-        </>
-    );
-
-    const handleLogOut = () => {
-        navigate("/");
-        logOut()
-            .then(() => {
-                console.log("LogOut successful");
-                toast.success("LogOut Successful");
-            })
-            .catch((err) => {
-                console.error(err);
-                toastify.error(formatFirebaseError(err), {
-                    position: "top-right",
-                    autoClose: 500,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    transition: Bounce,
-                });
-            });
-    };
-
-    return (
-        <div className="container mx-auto px-3 md:px-6 py-2">
-            <div className="navbar bg-base-100">
-                <div className="navbar-start">
-                    <Link to="/">
-                        <img
-                            className="w-20 sm:w-24"
-                            src="/logo.svg"
-                            alt="logo"
-                        />
-                    </Link>
-                </div>
-                <div className="navbar-center hidden lg:flex">
-                    <nav className="flex gap-7">{navLinks}</nav>
-                </div>
-                <div className="navbar-end gap-1">
-                    <div className="flex items-center gap-3 mr-4">
-                        {user && !isAdmin && (
-                            <div className="hidden sm:block">
-                                <NavLink
-                                    to="/orders"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "font-semibold text-primary dark:text-primary"
-                                            : "font-semibold text-[#444444] dark:text-gray-200"
-                                    }
-                                >
-                                    My Orders
-                                </NavLink>
-                            </div>
-                        )}
-                        {user && isAdmin && (
-                            <div className="hidden sm:block">
-                                <NavLink
-                                    to="/manage-orders"
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? "font-semibold text-primary dark:text-primary"
-                                            : "font-semibold text-[#444444] dark:text-gray-200"
-                                    }
-                                >
-                                    Manage Orders
-                                </NavLink>
-                            </div>
-                        )}
-                        {user && (
-                            <div
-                                role="button"
-                                className="btn btn-ghost btn-circle avatar"
-                            >
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt={
-                                            user.displayName
-                                                ? user.displayName
-                                                : "User Image"
-                                        }
-                                        src={
-                                            user.photoURL
-                                                ? user.photoURL
-                                                : userDefaultPicture
-                                        }
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    {user ? (
-                        <button
-                            onClick={handleLogOut}
-                            className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5"
-                        >
-                            Logout
-                        </button>
-                    ) : (
-                        <Link
-                            to="/login"
-                            className="btn bg-transparent border border-primary text-primary hover:bg-primary hover:text-white transition-all md:px-5"
-                        >
-                            Login
-                        </Link>
-                    )}
-
-                    <div className="dropdown" ref={dropdownRef}>
-                        <div
-                            tabIndex={0}
-                            role="button"
-                            className="btn btn-ghost lg:hidden"
-                            onClick={() =>
-                                setIsMobileMenuOpen(!isMobileMenuOpen)
-                            }
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16"
-                                />
-                            </svg>
-                        </div>
-                        {isMobileMenuOpen && (
-                            <nav
-                                tabIndex={0}
-                                className="flex flex-col absolute right-0 mt-3 z-[1] p-4 gap-2 shadow bg-base-100 rounded-box w-52"
-                            >
-                                {navLinks}
-                            </nav>
-                        )}
-                    </div>
-                </div>
+              )}
             </div>
+
+            {/* Mobile menu button */}
+            <button className="md:hidden p-2 text-gray-600 hover:text-blue-500">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-    );
-};
-
-SingleNav.propTypes = {
-    pageTitle: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    setIsMobileMenuOpen: PropTypes.func.isRequired,
-};
-
-SingleScroll.propTypes = {
-    ScrollTitle: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    setIsMobileMenuOpen: PropTypes.func.isRequired,
+      </div>
+    </header>
+  );
 };
 
 export default Header;
