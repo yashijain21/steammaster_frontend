@@ -14,11 +14,7 @@
     "name": "Support Dygnet Runt",
     "icon": "icons/person.svg"
   },
-  {
-    "_id": 4,
-    "name": "Bästa Utrustningen",
-    "icon": "icons/wrench.svg"
-  },
+  
   {
     "_id": 5,
     "name": "100% Nöjdhetsgaranti",
