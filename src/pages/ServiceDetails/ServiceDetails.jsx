@@ -83,21 +83,36 @@ const ServiceDetails = () => {
                             </div>
                         </div>
 
-                        {/* Service Process */}
-                        <div className="mb-12">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6 barlow-bold">How It Works</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                {['Consultation', 'Service Execution', 'Quality Check'].map((step, index) => (
-                                    <div key={index} className="bg-gray-50 p-6 rounded-lg border-l-4 border-primary">
-                                        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold mb-3 barlow-bold">
-                                            {index + 1}
-                                        </div>
-                                        <h3 className="font-bold text-lg mb-2 barlow-regular">{step}</h3>
-                                        <p className="text-secondary barlow-regular">Detailed description of this step in the process</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                       {/* Service Process */}
+<div className="mb-12">
+  <h2 className="text-2xl font-bold text-gray-900 mb-6 barlow-bold">Så fungerar det</h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {[
+      {
+        title: "Välj tjänst",
+        description: "Utforska vårt utbud och välj den tjänst som passar dina behov bäst."
+      },
+      {
+        title: "Boka tid",
+        description: "Välj ett tillgängligt datum och tid – snabbt och enkelt online."
+      },
+      {
+        title: "Utförande av tjänst",
+        description: "Vårt professionella team kommer till dig och utför arbetet noggrant och effektivt."
+      }
+    ].map((step, index) => (
+      <div key={index} className="bg-gray-50 p-6 rounded-lg border-l-4 border-primary">
+        <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold mb-3 barlow-bold">
+          {index + 1}
+        </div>
+        <h3 className="font-bold text-lg mb-2 barlow-regular">{step.title}</h3>
+        <p className="text-secondary barlow-regular">{step.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
 
                         {/* Gallery */}
                         <div>
@@ -131,12 +146,12 @@ const ServiceDetails = () => {
                                 <span className="text-3xl font-bold text-primary barlow-regular">{service.price} kr</span>
                             </div>
 
-                            <Link
-                                to={`/service/${service._id}/checkout`}
+                            <div
+            
                                 className="block w-full bg-primary hover:bg-primary-dark text-white text-center py-4 rounded-lg font-bold transition-all shadow-lg hover:shadow-xl barlow-bold"
                             >
                                 Book This Service
-                            </Link>
+                            </div>
                         </div>
 
                         {/* Other Services */}
@@ -145,7 +160,7 @@ const ServiceDetails = () => {
                                 You Might Also Like
                             </h3>
                             <div className="space-y-4">
-                                {allServices.map((item) => (
+                                {allServices.slice(0, 8).map((item) => (
                                     <NavLink
                                         key={item._id}
                                         to={`/service/${item._id}`}

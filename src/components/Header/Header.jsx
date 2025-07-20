@@ -2,6 +2,8 @@ import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
+import { label } from "framer-motion/client";
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -31,28 +33,40 @@ const Header = () => {
           </div>
 
           {/* Center - Nav Items */}
-          <nav className="hidden md:flex items-center justify-center gap-8 text-sm font-medium">
-            {[
-              { label: "Hem", id: "home" },
-              { label: "Tjänster", id: "services" },
-              { label: "Om Oss", id: "about" },
-              { label: "Kontakt", id: "contact" },
-            ].map(({ label, id }) => (
-              <ScrollLink
-                key={id}
-                to={id}
-                smooth={true}
-                duration={600}
-                offset={-80}
-                spy={true}
-                activeClass="text-secondary font-semibold"
-                className="cursor-pointer px-1 py-2 transition-colors duration-300 relative group text-gray-600 hover:text-secondary"
-              >
-                {label}
-                <span className="absolute bottom-0 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
-              </ScrollLink>
-            ))}
-          </nav>
+       <nav className="hidden md:flex items-center justify-center gap-8 text-sm font-medium">
+  {[
+    { label: "Hem", id: "home" },
+    { label: "Tjänster", id: "services" },
+    { label: "Om Oss", id: "about" },
+    { label: "Kontakt", id: "contact" },
+    { label: "FAQ", id: "/FAQ" }, // This one is a route
+  ].map(({ label, id }) =>
+    id.startsWith("/") ? (
+      <RouterLink
+        key={id}
+        to={id}
+        className="cursor-pointer px-1 py-2 transition-colors duration-300 relative group text-gray-600 hover:text-secondary"
+      >
+        {label}
+        <span className="absolute bottom-0 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+      </RouterLink>
+    ) : (
+      <ScrollLink
+        key={id}
+        to={id}
+        smooth={true}
+        duration={600}
+        offset={-80}
+        spy={true}
+        activeClass="text-secondary font-semibold"
+        className="cursor-pointer px-1 py-2 transition-colors duration-300 relative group text-gray-600 hover:text-secondary"
+      >
+        {label}
+        <span className="absolute bottom-0 left-0 h-0.5 bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
+      </ScrollLink>
+    )
+  )}
+</nav>
 
           {/* Right - Sign In & Search */}
           <div className="flex items-center gap-4">

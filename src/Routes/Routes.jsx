@@ -12,6 +12,9 @@ import ManageOrders from "../pages/ManageOrders/ManageOrders";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AdminRoute from "./AdminRoute";
 import { baseUrl } from "../hooks/useAxiosPublic";
+import Appoinment from "../components/Appoinment/Appoinment"
+import Faq from "../components/Faq/Faq"
+import CategoryDetails from "../pages/CategoryDeatail/CategoryDetail";
 
 const router = createBrowserRouter([
     {
@@ -31,11 +34,26 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <Register />,
             },
+              {
+                path: "/appoinment",
+                element: <Appoinment />,
+            },
+              {
+                path: "/FAQ",
+                element: <Faq />,
+            },
+
             {
                 path: "/service/:id",
                 element: <ServiceDetails />,
                 loader: ({ params }) =>
                     fetch(`${baseUrl}/services/${params.id}`),
+            },
+             {
+                path: "/category/:id",
+                element: <CategoryDetails />,
+                loader: ({ params }) =>
+                    fetch(`${baseUrl}/categories/${params.id}`),
             },
             {
                 path: "/service/:id/checkout",

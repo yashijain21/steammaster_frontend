@@ -5,27 +5,27 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import { FaArrowRight } from "react-icons/fa";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
-import '../../../index.css'
+import '../../../index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ServicesSection = () => {
-  const [services, setServices] = useState([]);
+const CategoriesSection = () => {
+  const [categories, setCategories] = useState([]);
   const axios = useAxiosPublic();
-
   const sectionRef = useRef(null);
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchCategories = async () => {
       try {
-        const res = await axios.get("/services");
-        setServices(res.data);
+        const res = await axios.get("/categories");
+        const topLevelCategories = res.data.filter(cat => cat.parent === null);
+        setCategories(topLevelCategories);
       } catch (error) {
-        console.error("Failed to fetch services:", error.message);
+        console.error("Failed to fetch categories:", error.message);
       }
     };
-    fetchServices();
+    fetchCategories();
   }, [axios]);
 
   useEffect(() => {
@@ -73,11 +73,11 @@ const ServicesSection = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [services]);
+  }, [categories]);
 
   return (
     <div
-      className="space-y-5  barlow-regular bg-gradient-to-b from-gray-50 to-white barlow-regular"
+      className="space-y-5 bg-gradient-to-b from-gray-50 to-white barlow-regular"
       id="services"
       ref={sectionRef}
     >
@@ -89,49 +89,38 @@ const ServicesSection = () => {
         />
       </div>
 
-{/* Services Cards Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 mt-8">
-  {services.slice(0, 4).map((service) => (
-    <div
-      key={service._id}
-      className="relative h-80 overflow-hidden group shadow-md"
-    >
-      {/* Background Image */}
-      <img
-        src={
-          service.image ||
-          "https://gomechprod.blob.core.windows.net/gm-retail-app/service-new-images/Dry%20Cleaning%20sq.jpg"
-        }
-        alt={service.name}
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-      />
-
-      {/* Full Overlay */}
-      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/70 flex flex-col justify-end px-4 pb-6 transition-colors duration-500 ease-in-out">
-        <h3 className="text-white text-lg font-bold uppercase tracking-wide transition-all duration-500">
-          {service.name}
-        </h3>
-        <p className="text-gray-300 text-sm mt-1 transition-all duration-500">
-          {service.description}
-        </p>
-
-        {/* Hover Arrow to Details */}
-        <Link
-          to={`/service/${service._id}`}
-          className="mt-4 text-white text-4xl transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out"
-        >
-          &rarr;
-        </Link>
+      {/* Categories Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-4 mt-8">
+        {categories.slice(0, 4).map((category) => (
+          <div
+            key={category._id}
+            className="relative h-80 overflow-hidden group shadow-md"
+          >
+            <img
+              src={
+                category.image ||
+                "https://gomechprod.blob.core.windows.net/gm-retail-app/service-new-images/Dry%20Cleaning%20sq.jpg"
+              }
+              alt={category.name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+            />
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/70 flex flex-col justify-end px-4 pb-6 transition-colors duration-500 ease-in-out">
+              <h3 className="text-white text-lg font-bold uppercase tracking-wide transition-all duration-500">
+                {category.name}
+              </h3>
+              <p className="text-gray-300 text-sm mt-1 transition-all duration-500">
+                {category.description?.slice(0, 80)}...
+              </p>
+              <Link
+                to={`/category/${category._id}`}
+                className="mt-4 text-white text-4xl transform translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out"
+              >
+                &rarr;
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-
-
-
-
-
-
 
       <div className="text-center pt-4">
         <button
@@ -145,4 +134,4 @@ const ServicesSection = () => {
   );
 };
 
-export default ServicesSection;
+export default CategoriesSection;

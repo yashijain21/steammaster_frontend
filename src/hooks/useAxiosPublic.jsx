@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 🌐 Base URL for Render-deployed backend
-export const baseUrl = "https://steammaster-backend-2.onrender.com/api";
+export const baseUrl = "https://steammaster-backend-3.onrender.com/api";
 
 const axiosPublic = axios.create({
   baseURL: baseUrl,
