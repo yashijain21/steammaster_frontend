@@ -37,19 +37,19 @@ const Features = () => {
   }, [features]);
 
   return (
-    <div className="py-10 space-y-10 barlow-regular" ref={wrapperRef}>
+    <div className="py-10 space-y-10 barlow-regular " ref={wrapperRef}>
       <SectionTitle
         section="Våra Kärnvärden"
         title="Varför Välja Oss"
         description="Vi erbjuder enastående service, pålitlighet och kvalitet. Våra kunder litar på oss för professionell bilvård med bästa möjliga resultat."
       />
       {features.length ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {features.map((feature, index) => (
             <div
               key={feature._id}
               ref={(el) => (featuresRef.current[index] = el)}
-              className="flex flex-col items-center gap-3 border border-gray-300 rounded-lg py-6 hover:shadow-lg transition-shadow duration-300 bg-white"
+              className="flex flex-col items-center justify-center gap-3 border border-gray-300 rounded-lg py-6 hover:shadow-lg transition-shadow duration-300 bg-white"
             >
               <img
                 src={feature.icon}

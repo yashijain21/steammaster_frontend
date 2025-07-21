@@ -77,13 +77,13 @@ const CategoriesSection = () => {
 
   return (
     <div
-      className="space-y-5 bg-gradient-to-b from-gray-50 to-white barlow-regular"
+      className="space-y-5 bg-gradient-to-b from-gray-50 to-white barlow-regular p-5"
       id="services"
       ref={sectionRef}
     >
       <div className="section-title">
         <SectionTitle
-          section="Tjänster"
+          
           title="Våra Tjänsteområden"
           description="SteamMaster erbjuder professionella bilvårdstjänster som får din bil att glänsa – både invändigt och utvändigt."
         />
@@ -104,7 +104,7 @@ const CategoriesSection = () => {
               alt={category.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
             />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/70 flex flex-col justify-end px-4 pb-6 transition-colors duration-500 ease-in-out">
+            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/70 flex flex-col justify-end px-4 pb-6 transition-colors duration-500 ease-in-out">
               <h3 className="text-white text-lg font-bold uppercase tracking-wide transition-all duration-500">
                 {category.name}
               </h3>
