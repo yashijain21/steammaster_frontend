@@ -47,38 +47,61 @@ const FAQItem = ({ question, answer, index }) => {
 const FAQSection = () => {
   const faqs = [
     {
-      question: "How do I reset my password?",
-      answer: "You can reset your password by clicking on 'Forgot Password' on the login page."
+      question: "Vad är rekond?",
+      answer:
+        "Rekond (rekonditionering) innebär en noggrann rengöring och återställning av bilens interiör och exteriör. Hos Steam Master fokuserar vi på skonsam ångtvätt, fläckborttagning, luktneutralisering och ytbehandling för att återställa bilens skick."
     },
     {
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards, PayPal, and bank transfers."
+      question: "Vad är skillnaden mellan biltvätt och rekond?",
+      answer:
+        "En vanlig biltvätt handlar främst om att avlägsna smuts från bilens yta. Rekond är mer omfattande och inkluderar djuprengöring av interiör, polering, lackbehandling och ibland motortvätt – allt för att återställa bilens helhetsintryck."
     },
     {
-      question: "How can I contact customer support?",
-      answer: "You can reach our support team 24/7 through the live chat or email support@example.com."
+      question: "Polerar ni bilar utomhus?",
+      answer:
+        "Nej, vi polerar inte bilar utomhus eftersom damm och väderförhållanden kan påverka resultatet. All polering utförs i kontrollerad miljö för bästa finish."
     },
     {
-      question: "What's your refund policy?",
-      answer: "We offer 30-day money back guarantee for all our premium plans."
+      question: "Lägger ni Keramiskt lackskydd utomhus?",
+      answer:
+        "Nej, applicering av Keramiskt lackskydd kräver en dammfri och kontrollerad miljö. Vi utför detta endast inomhus för att garantera hållbarhet och skydd."
+    },
+    {
+      question: "Varför måste min bil förvaras inomhus ett dygn efter att Keramiskt lackskydd applicerats?",
+      answer:
+        "Det keramiska skyddet behöver härda i minst 24 timmar utan påverkan av regn, smuts eller direkt solljus. Inomhusförvaring säkerställer optimal vidhäftning och långvarigt skydd."
+    },
+    {
+      question: "Hur ska jag ta hand om min bil efter att ni applicerat Keramiskt lackskydd?",
+      answer:
+        "Undvik biltvätt under de första 7 dagarna. Använd pH-neutrala rengöringsmedel och undvik automatiska biltvättar med borstar för att bevara skyddet längre."
+    },
+    {
+      question: "Vad ingår i de olika rekondtjänsterna?",
+      answer:
+        "Vi erbjuder flera rekondpaket: Inre rekond (interiörrengöring), Yttre rekond (tvätt, avfettning, polering), och Helrekond (komplett behandling inklusive lackskydd). Se vår tjänstesida för detaljerat innehåll."
     }
   ];
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <motion.h2 
+      <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="text-3xl font-bold text-secondary mb-2 text-center p-5"
       >
-        Frequently Asked Questions
+        Vanliga Frågor
       </motion.h2>
-    
-      
+
       <div className="space-y-2">
         {faqs.map((faq, index) => (
-          <FAQItem key={index} index={index} question={faq.question} answer={faq.answer} />
+          <FAQItem
+            key={index}
+            index={index}
+            question={faq.question}
+            answer={faq.answer}
+          />
         ))}
       </div>
 
@@ -88,11 +111,13 @@ const FAQSection = () => {
         className="mt-8 bg-gradient-to-r from-primary to-secondary p-0.5 rounded-lg"
       >
         <button className="w-full bg-white hover:bg-gray-50 text-primary font-semibold py-3 px-6 rounded-lg transition-all">
-          Contact Support
+          Kontakta Supporten
         </button>
       </motion.div>
     </div>
   );
 };
+
+
 
 export default FAQSection;
