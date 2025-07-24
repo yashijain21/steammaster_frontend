@@ -10,6 +10,7 @@ import Filter from "./Filter"
 import SpotlightText from "./Spotlight";
 import WhyChooseUs from "./WhyChooseUs";
 import MarqueeText from "./Marquee";
+import BookingForm from "../../components/Appoinment/BookingForm";
 const Home = () => {
     return (
         <div className=" barlow-regular">
@@ -23,7 +24,7 @@ const Home = () => {
             <ServicesSection />
             <CallToAction />
              <CarServicesShowcase/>
-          
+          {/* <BookingForm/> */}
             <SpotlightText/>
             <Testimonials />
         </div>

@@ -12,10 +12,10 @@ import ManageOrders from "../pages/ManageOrders/ManageOrders";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AdminRoute from "./AdminRoute";
 import { baseUrl } from "../hooks/useAxiosPublic";
-import Appoinment from "../components/Appoinment/Appoinment"
+import Booking from "../components/Appoinment/BookingForm"
 import Faq from "../components/Faq/Faq"
 import CategoryDetails from "../pages/CategoryDeatail/CategoryDetail";
-
+import ThankYou from "../components/Appoinment/Thankyou";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -36,7 +36,11 @@ const router = createBrowserRouter([
             },
               {
                 path: "/appoinment",
-                element: <Appoinment />,
+                element: <Booking />,
+            },
+            {
+                path:"/thank-you",
+                element:<ThankYou/>
             },
               {
                 path: "/FAQ",

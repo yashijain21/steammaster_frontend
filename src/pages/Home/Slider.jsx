@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import {Link} from "react-router-dom"
 import { Typewriter } from "react-simple-typewriter";
 import img from "/images/homeCarousel/2.jpg"
 const slide = {
@@ -68,9 +69,12 @@ function HeroAnimation() {
             </h1>
             <p className="text-lg barlow-regular mb-6">{slide.description}</p>
             <div className="flex gap-4">
-              <button className="btn bg-primary text-white border-primary hover:bg-[#d62400] barlow-regular">
+              <Link to="/appoinment">
+                     <button className="btn bg-primary text-white border-primary hover:bg-[#d62400] barlow-regular">
                 Boka Nu
               </button>
+
+              </Link>
               <button className="btn bg-transparent border-white text-white hover:bg-[#ffffff4d] barlow-regular">
                 Läs Mer
               </button>
