@@ -1,12 +1,29 @@
 import { useEffect, useState } from "react";
+import {
+  Sofa,
+  Car,
+  Wrench,
+  Sailboat,
+  Paintbrush,
+} from "lucide-react";
+
+
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import DatePicker from "react-datepicker";
-import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 const BookingForm = () => {
   const axios = useAxiosPublic();
   const navigate = useNavigate();
+  const location = useLocation();
+const categoryIcons = {
+  "Möbelrengöring": Sofa,
+  "Biltvättstjänster": Car,
+  "Rekonditionering": Wrench,
+  "Husbil & Båt": Sailboat,
+  "Lackreparation & Små Bucklor": Paintbrush,
+};
 
   const [allCategories, setAllCategories] = useState([]);
   const [parentCategories, setParentCategories] = useState([]);
@@ -28,6 +45,7 @@ const BookingForm = () => {
 
   const totalPrice = selectedServices.reduce((acc, item) => acc + item.price, 0);
 
+  // Fetch categories and services
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,37 +53,60 @@ const BookingForm = () => {
           axios.get("/categories"),
           axios.get("/services"),
         ]);
+
         setAllCategories(catRes.data);
         setAllServices(serviceRes.data);
         const parentCats = catRes.data.filter((cat) => !cat.parent);
         setParentCategories(parentCats);
+
+        // If coming from category page with pre-selected service
+        if (location.state?.selectedService) {
+          const svc = location.state.selectedService;
+          const fullService = serviceRes.data.find((s) => s._id === svc._id);
+          if (fullService) {
+            setSelectedParentId(fullService.category);
+            setSelectedServices([fullService]);
+            const filtered = serviceRes.data.filter(
+              (s) => s.category === fullService.category
+            );
+            setFilteredServices(filtered);
+            setStep(2);
+          }
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchData();
-  }, []);
 
+    fetchData();
+  }, [location.state, axios]);
+
+  // Filter services based on selected parent category
   useEffect(() => {
     if (selectedParentId) {
       const subcategoryIds = allCategories
         .filter((cat) => cat.parent === selectedParentId)
         .map((cat) => cat._id);
-      const services = allServices.filter((svc) =>
-        subcategoryIds.includes(svc.category)
-      );
+const services = allServices.filter(
+  (svc) =>
+    subcategoryIds.includes(svc.category) || svc.category === selectedParentId
+);
+
+
       setFilteredServices(services);
-      setSelectedServices([]);
     }
   }, [selectedParentId, allCategories, allServices]);
 
+  // Fetch booked times
   useEffect(() => {
     const fetchBookedTimes = async () => {
       if (!date) return;
       const selectedDate = date.toISOString().split("T")[0];
       try {
         const res = await axios.get(`/appointments?date=${selectedDate}`);
-        const times = res.data.map((appt) => new Date(`${selectedDate}T${appt.appointmentTime}`));
+        const times = res.data.map((appt) =>
+          new Date(`${selectedDate}T${appt.appointmentTime}`)
+        );
         setBookedTimes(times);
       } catch (error) {
         console.error("Error fetching booked slots:", error);
@@ -83,12 +124,20 @@ const BookingForm = () => {
     }
   };
 
+  const removeService = (serviceId) => {
+    setSelectedServices((prev) => prev.filter((s) => s._id !== serviceId));
+  };
+
   const handleSubmit = async () => {
     const payload = {
       services: selectedServices.map((s) => s._id),
       totalPrice,
       appointmentDate: date.toISOString().split("T")[0],
-      appointmentTime: date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false }),
+      appointmentTime: date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }),
       customerName: name,
       customerEmail: email,
       customerPhone: phone,
@@ -97,7 +146,7 @@ const BookingForm = () => {
     try {
       const response = await axios.post("/appointments", payload);
       console.log("Appointment booked:", response.data);
-      navigate("/thank-you"); // ✅ redirect
+      navigate("/thank-you");
     } catch (err) {
       console.error("Error booking appointment:", err);
       alert("Error booking appointment.");
@@ -124,127 +173,160 @@ const BookingForm = () => {
   };
 
   const steps = [
-    { id: 1, label: "Select Category" },
-    { id: 2, label: "Select Services" },
-    { id: 3, label: "Personal Info" },
-    { id: 4, label: "Review & Confirm" },
+    { id: 1, },
+    { id: 2,},
+    { id: 3, },
+    { id: 4,  },
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      {/* Step Indicator */}
-      <div className="flex justify-between items-center relative mb-8">
-        {steps.map((item, idx) => (
-          <div key={item.id} className="flex-1 flex flex-col items-center">
-            <div
-              className={`w-10 h-10 flex items-center justify-center rounded-full z-10 border-4 ${
-                step === item.id
-                  ? "bg-secondary text-white border-secondary"
-                  : step > item.id
-                  ? "bg-primary text-white border-primary"
-                  : "bg-white text-gray-500 border-gray-300"
-              }`}
-            >
-              {item.id}
-            </div>
-            <span className="text-xs mt-2 text-center">{item.label}</span>
-            {idx !== steps.length - 1 && (
-              <div
-                className={`absolute top-5 left-[calc(${(idx + 1) * 25}%)] h-1 w-[25%] ${
-                  step > item.id ? "bg-primary" : "bg-gray-300"
-                }`}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+    <div className=" max-w-4xl mx-auto p-4 border-secondary m-7 rounded-xl shadow-lg border ">
+     
 
       {/* Step Content */}
-      <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
-        {step === 1 && (
-          <>
-            <h2 className="text-xl font-semibold text-gray-700">Choose a Category</h2>
-            <div className="flex flex-wrap gap-3">
-              {parentCategories.map((cat) => (
-                <button
-                  key={cat._id}
-                  onClick={() => setSelectedParentId(cat._id)}
-                  className={`px-4 py-2 rounded-full border text-sm ${
-                    selectedParentId === cat._id
-                      ? "bg-secondary text-white border-secondary"
-                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-                  }`}
-                >
-                  {cat.name}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+      <div className="bg-white rounded-lg  p-6 space-y-6">
+        {/* Step 1 */}
+       {step === 1 && (
+  <>
+    <h2 className="text-2xl text-center font-semibold text-gray-800 mb-2">Step 1</h2>
+      <div className=" flex gap-2 ">
+                <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%] bg-gray-300 rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-gray-300 rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-gray-300 rounded-xl
+                }`}
+              />
+              </div> 
+    <p className="text-lg text-gray-600 mb-6">Select required service</p>
 
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+      {parentCategories.map((cat) => {
+        const Icon = categoryIcons[cat.name]; // get icon based on name
+
+        return (
+          <div
+            key={cat._id}
+            onClick={() => setSelectedParentId(cat._id)}
+            className={`cursor-pointer flex flex-col items-center p-4 rounded-xl border transition-all duration-200 ${
+              selectedParentId === cat._id
+                ? "border-secondary bg-secondary/10 text-secondary"
+                : "border-gray-300 hover:shadow-md text-gray-700"
+            }`}
+          >
+            <div className="w-14 h-14 flex items-center justify-center bg-gray-100 rounded-full mb-3">
+              {Icon ? <Icon className="w-6 h-6" /> : <span className="text-sm">Icon</span>}
+            </div>
+            <span className="text-center text-sm font-medium">{cat.name}</span>
+          </div>
+        );
+      })}
+    </div>
+
+  </>
+)}
+
+
+        {/* Step 2 */}
         {step === 2 && (
-          <>
-            <h2 className="text-xl font-semibold text-gray-700">Select Services</h2>
-            <div className="space-y-3">
-              {filteredServices.map((svc) => (
-                <label
-                  key={svc._id}
-                  className={`flex items-start gap-4 p-4 border rounded-md cursor-pointer ${
-                    selectedServices.some((s) => s._id === svc._id)
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200"
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedServices.some((s) => s._id === svc._id)}
-                    onChange={() => handleServiceToggle(svc)}
-                    className="mt-1 h-5 w-5 text-secondary"
-                  />
-                  <div>
-                    <p className="font-semibold">{svc.name}</p>
-                    <p className="text-sm text-gray-500">{svc.description}</p>
-                    <p className="text-secondary font-medium">{svc.price} kr</p>
-                  </div>
-                </label>
-              ))}
+          <div>
+            <h2 className="text-2xl font-semibold text-center text-gray-800 mb-2">Step 2</h2>
+                    <div className=" flex gap-2 ">
+                <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-gray-300 rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-gray-300 rounded-xl
+                }`}
+              />
+              </div>
+               <p className="text-lg text-gray-600 mt-6 mb-6">Select required service</p>
+            {filteredServices?.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                {filteredServices.map((service) => {
+                  const isSelected = selectedServices.some((s) => s._id === service._id);
+                  return (
+                    <label
+                      key={service._id}
+                      className={`border rounded-lg p-4 flex flex-col gap-2 cursor-pointer transition ${
+                        isSelected ? "border-blue-500 bg-blue-50 shadow-md" : "border-gray-300"
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => handleServiceToggle(service)}
+                          className="mr-2"
+                        />
+                        <span className="font-medium text-lg">{service.name}</span>
+                      </div>
+                      <p className="text-sm text-gray-500">{service.description}</p>
+                      <div className="text-right text-sm text-gray-700 font-semibold">
+                        {service.price} kr
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-gray-500 mt-4">No services available in this category.</p>
+            )}
+
+            <div className="flex justify-end items-center mt-6">
+              <span className="text-lg font-semibold text-blue-600">
+                Total: {totalPrice} kr
+              </span>
             </div>
-            <div className="text-right font-bold pt-2 text-secondary">Total: {totalPrice} kr</div>
-          </>
+          </div>
         )}
 
+        {/* Step 3 */}
         {step === 3 && (
           <>
-            <h2 className="text-xl font-semibold text-gray-700">Your Information</h2>
+            <h2 className="text-xl font-semibold text-center text-gray-700">Step 3</h2>
+            <div className=" flex gap-2 ">
+                <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-gray-300 rounded-xl
+                }`}
+              />
+              </div>
+              <p className="text-lg text-gray-600 mt-6 mb-6">Enter your information </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="border p-3 rounded-md"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                className="border p-3 rounded-md"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="border p-3 rounded-md"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Full Address"
-                className="border p-3 rounded-md md:col-span-2"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
+              <input type="text" placeholder="Full Name" className="border p-3 rounded-md" value={name} onChange={(e) => setName(e.target.value)} />
+              <input type="tel" placeholder="Phone Number" className="border p-3 rounded-md" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              <input type="email" placeholder="Email Address" className="border p-3 rounded-md" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input type="text" placeholder="Full Address" className="border p-3 rounded-md " value={address} onChange={(e) => setAddress(e.target.value)} />
               <DatePicker
                 selected={date}
                 onChange={(date) => setDate(date)}
@@ -260,9 +342,29 @@ const BookingForm = () => {
           </>
         )}
 
+        {/* Step 4 */}
         {step === 4 && (
           <>
-            <h2 className="text-xl font-semibold text-gray-700">Review & Confirm</h2>
+            <h2 className="text-xl font-semibold text-center text-gray-700">Step 4</h2>
+             <div className=" flex gap-2 ">
+                <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%] bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-primary rounded-xl
+                }`}
+              />
+              <div
+                className={` h-1 w-[25%]  bg-primary rounded-xl
+                }`}
+              />
+              </div>
+              <p className="text-lg text-gray-600 mt-6 mb-6">Review & Confirmation </p>
             <div className="text-sm space-y-2">
               <p><strong>Name:</strong> {name}</p>
               <p><strong>Phone:</strong> {phone}</p>
@@ -270,9 +372,17 @@ const BookingForm = () => {
               <p><strong>Address:</strong> {address}</p>
               <p><strong>Date:</strong> {date?.toLocaleString()}</p>
               <p className="font-semibold">Selected Services:</p>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside space-y-1">
                 {selectedServices.map((s) => (
-                  <li key={s._id}>{s.name} – {s.price} kr</li>
+                  <li key={s._id}>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <div className="font-medium">{s.name}</div>
+                        <div className="text-sm text-gray-500">{s.description}</div>
+                      </div>
+                      <div className="text-right font-semibold">{s.price} kr</div>
+                    </div>
+                  </li>
                 ))}
               </ul>
               <p className="text-right text-secondary font-bold">Total: {totalPrice} kr</p>
@@ -281,12 +391,12 @@ const BookingForm = () => {
         )}
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Buttons */}
       <div className="mt-6 flex justify-between">
         {step > 1 && (
           <button
             onClick={prevStep}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded"
+            className="bg-gray-300 hover:bg-primary text-gray-800 hover:text-white px-4 py-2 rounded"
           >
             Back
           </button>
@@ -294,7 +404,7 @@ const BookingForm = () => {
         {step < 4 ? (
           <button
             onClick={nextStep}
-            className="bg-secondary hover:bg-blue-700 text-white px-6 py-2 rounded ml-auto"
+            className="bg-secondary hover:bg-primary text-white px-6 py-2 rounded ml-auto"
             disabled={!validateStep(step)}
           >
             Next

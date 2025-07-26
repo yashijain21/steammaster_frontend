@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaSearch, FaUser } from "react-icons/fa";
-import { Link as ScrollLink } from "react-scroll";
+
 import { Link as RouterLink } from "react-router-dom";
 
 const Header = () => {
@@ -56,8 +56,8 @@ const Header = () => {
 
             </div>
 
-            <ScrollLink to="about" smooth duration={600} offset={-80} className="nav-link">Om Oss</ScrollLink>
-            <ScrollLink to="contact" smooth duration={600} offset={-80} className="nav-link">Kontakt</ScrollLink>
+            <RouterLink to="about" smooth duration={600} offset={-80} className="nav-link">Om Oss</RouterLink>
+            <RouterLink to="contactus" smooth duration={600} offset={-80} className="nav-link">Kontakt</RouterLink>
             <RouterLink to="/FAQ" className="nav-link">FAQ</RouterLink>
           </nav>
 

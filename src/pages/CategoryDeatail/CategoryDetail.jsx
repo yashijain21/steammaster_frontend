@@ -220,11 +220,10 @@ const AccordionItem = ({ sub, axios }) => {
                   </p>
                 </div>
               </div>
-           <Link to="/appoinment">
-              <button className="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg transition-colors whitespace-nowrap">
-                Boka Tid
-              </button>
-           </Link>
+         <Link to="/appoinment" state={{ selectedService: service }}>
+  <button className="bg-primary ...">Boka Tid</button>
+</Link>
+
             </div>
           ))}
         </div>
@@ -399,11 +398,17 @@ const CategoryDetails = () => {
                     <p className="text-sm text-gray-600 mt-2 line-clamp-2">{service.description}</p>
                     <div className="flex justify-between items-center mt-4">
                       <div className="text-primary font-bold text-lg">{service.price} kr</div>
-                     <Link to="/appoinment">
+                     {/* <Link to="/appoinment" state={{ selectedService: service }}>
                       <button className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors">
                         Boka Tid
                       </button>
-                     </Link>
+                     </Link> */}
+                     <Link to="/appoinment" state={{ selectedService: service }}>
+  <button className="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg transition-colors whitespace-nowrap">
+    Boka Tid
+  </button>
+</Link>
+
                     </div>
                   </div>
                 ))}

@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@fullcalendar/common/main.css;
+@fullcalendar/daygrid/main.css;
+@fullcalendar/timegrid/main.css;
 .barlow-thin {
   font-family: "Barlow", sans-serif;
   font-weight: 100;

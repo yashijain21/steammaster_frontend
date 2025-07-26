@@ -16,6 +16,9 @@ import Booking from "../components/Appoinment/BookingForm"
 import Faq from "../components/Faq/Faq"
 import CategoryDetails from "../pages/CategoryDeatail/CategoryDetail";
 import ThankYou from "../components/Appoinment/Thankyou";
+import ContactUs from "../pages/Contact-US";
+import AboutUs from "../pages/Aboutus";
+import AppointmentsDashboard from "../components/Appoinment/Appoinment_dasboard";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -25,6 +28,14 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+             {
+                path: "/contactus",
+                element: <ContactUs/>,
+            },
+             {
+                path: "/about",
+                element:<AboutUs/>,
             },
             {
                 path: "/login",
@@ -41,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path:"/thank-you",
                 element:<ThankYou/>
+            },
+            {
+                path:"/appoinment-dashboard",
+                element:<AppointmentsDashboard/>
             },
               {
                 path: "/FAQ",
