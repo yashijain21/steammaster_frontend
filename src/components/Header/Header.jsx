@@ -55,10 +55,12 @@ const Header = () => {
 </div>
 
             </div>
-
+           <RouterLink to="/category/687b744c252221dd770c3c7e" className="nav-link">Mobil tjänster</RouterLink>
+              <RouterLink to="/category/687b744c252221dd770c3c7f" className="nav-link">Företagstjänster</RouterLink>
             <RouterLink to="about" smooth duration={600} offset={-80} className="nav-link">Om Oss</RouterLink>
             <RouterLink to="contactus" smooth duration={600} offset={-80} className="nav-link">Kontakt</RouterLink>
             <RouterLink to="/FAQ" className="nav-link">FAQ</RouterLink>
+  
           </nav>
 
           {/* Right side */}

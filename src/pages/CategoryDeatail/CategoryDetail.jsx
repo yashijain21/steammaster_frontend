@@ -122,7 +122,51 @@ djuprengöra och fräscha upp deras lösa och fasta möbler. Fläckborttagning o
     "Motortvätt med skydd av känsliga komponenter",
     "Skräddarsydda paket: Bas, Silver, Premium & Elite"
   ]
-}
+},
+"Mobil tjänster": {
+    title1: "Mobila Städ- och Tvättjänster direkt till din dörr",
+    desc1: `Steam Master erbjuder ett brett utbud av mobila tjänster – från möbeltvätt till bilvård, utförda där du befinner dig. Vårt team kommer till din bostad eller arbetsplats och levererar professionell service med miljövänliga metoder.`,
+    points: [
+      "Vi kommer till dig",
+      "Flexibla tider",
+      "Miljösmarta lösningar"
+    ],
+   "benefitTitle1": "Slipp köer och logistik – Vi gör jobbet på plats",
+    "benefitDesc1": `Oavsett om det gäller bilen, soffan eller hela bostaden erbjuder vi bekväma och professionella mobila tjänster som sparar både tid och energi.`,
+    "benefitTitle2": "Utrustning för alla miljöer",
+    "benefitDesc2": `Vi använder portabel ångteknologi och professionella rengöringsprodukter som är säkra för både hem och fordon.`,
+    "processTitle": "Så fungerar våra mobila tjänster",
+    "processDesc1": `Du bokar enkelt via vår hemsida eller telefon.`,
+    "processDesc2": `Vi kommer till din plats med all utrustning och utför jobbet utan att du behöver lyfta ett finger.`,
+    "checklist": [
+      "Tidsbesparande",
+      "Bekvämt",
+      "Skräddarsytt efter dina behov",
+      "Perfekt för barnfamiljer & äldre"
+    ]
+  },
+  "Företagstjänster": {
+    title1: "Professionella rengöringstjänster för företag i Sverige",
+    desc1: `Steam Master erbjuder företagsanpassade lösningar inom rengöring, möbeltvätt, bilvård och mer. Vi hjälper kontor, restauranger, hotell och bilfirmor att hålla sina lokaler och fordon i toppskick.`,
+    points: [
+      "Flexibla avtal",
+      "På plats hos er",
+      "Diskret och effektivt"
+    ],
+    benefitTitle1: "Anpassade lösningar för varje bransch",
+    benefitDesc1: `Oavsett om du driver ett café, ett kontor eller ett bilföretag, har vi ett rengöringspaket för dig – anpassat efter din miljö och ditt schema.`,
+    benefitTitle2: "Professionell personal och utrustning",
+    benefitDesc2: `Vi använder modern ångteknik och utbildad personal för att säkerställa ett hygieniskt och representativt resultat – varje gång.`,
+    processTitle: "Så fungerar det",
+    processDesc1: `Vi börjar med ett kostnadsfritt konsultationsmöte för att identifiera behov.`,
+    processDesc2: `Därefter skapar vi ett avtal och sätter upp ett regelbundet schema.`,
+    checklist: [
+      "Möbeltvätt för kontor & hotell",
+      "Biltvätt för bilhandlare & leasing",
+      "Rengöring inför kundmöten & inspektioner",
+      "Flexibla bokningar – dagtid, kväll eller helg"
+    ]
+  }
 
 
 
@@ -221,7 +265,7 @@ const AccordionItem = ({ sub, axios }) => {
                 </div>
               </div>
          <Link to="/appoinment" state={{ selectedService: service }}>
-  <button className="bg-primary ...">Boka Tid</button>
+  <button className=" bg-primary hover:bg-secondary text-white px-6 py-2 rounded-lg transition-colors whitespace-nowrap">Boka Tid</button>
 </Link>
 
             </div>
@@ -285,7 +329,7 @@ const CategoryDetails = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 my-12 flex flex-col lg:flex-row gap-8">
+      <div className=" mx-5  my-12 flex flex-col lg:flex-row gap-8">
         {/* Left Column */}
         <div className="flex-1 space-y-12">
           {staticContent && (
@@ -404,7 +448,7 @@ const CategoryDetails = () => {
                       </button>
                      </Link> */}
                      <Link to="/appoinment" state={{ selectedService: service }}>
-  <button className="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg transition-colors whitespace-nowrap">
+  <button className="bg-primary hover:bg-secondary text-white px-6 py-2 rounded-lg transition-colors whitespace-nowrap">
     Boka Tid
   </button>
 </Link>
