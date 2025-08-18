@@ -27,6 +27,7 @@ const categoryIcons = {
 
   const [allCategories, setAllCategories] = useState([]);
   const [parentCategories, setParentCategories] = useState([]);
+  
   const [selectedParentId, setSelectedParentId] = useState("");
 
   const [allServices, setAllServices] = useState([]);
