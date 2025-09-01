@@ -19,7 +19,7 @@ const ThankYou = () => {
         </div>
 
         <Link
-          to="/"
+          to="https://salmon-sparrow-489592.hostingersite.com/Steam%20Master/index.html"
           className="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-all"
         >
           Go to Homepage

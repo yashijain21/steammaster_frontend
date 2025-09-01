@@ -5,6 +5,8 @@ import {
   Wrench,
   Sailboat,
   Paintbrush,
+  DoorOpen,
+  Building
 } from "lucide-react";
 
 
@@ -18,11 +20,13 @@ const BookingForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 const categoryIcons = {
+  "Mobil tjänster":DoorOpen,
   "Möbelrengöring": Sofa,
   "Biltvättstjänster": Car,
   "Rekonditionering": Wrench,
   "Husbil & Båt": Sailboat,
   "Lackreparation & Små Bucklor": Paintbrush,
+  "Företagstjänster":Building,
 };
 
   const [allCategories, setAllCategories] = useState([]);

@@ -15,10 +15,10 @@ const MainLayout = () => {
 
       {/* Actual page content above the bubbles */}
       <div className="relative z-10">
-        <Header />
+        {/* <Header /> */}
         <BubbleBackground />
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
